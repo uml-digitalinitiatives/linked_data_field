@@ -71,11 +71,13 @@ class LCSubjectWidget extends WidgetBase {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element['value'] = $element + [
-      '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
-      '#size' => $this->getSetting('size'),
-      '#placeholder' => $this->getSetting('placeholder'),
-      '#maxlength' => $this->getFieldSetting('max_length'),
+        '#type' => 'textfield',
+        '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
+        '#size' => $this->getSetting('size'),
+        '#placeholder' => $this->getSetting('placeholder'),
+        '#maxlength' => $this->getFieldSetting('max_length'),
+        '#autocomplete_route_name' => 'lc_subject_field.autocomplete',
+        '#autocomplete_route_parameters' => array('field_name' => 'lc_subject_field', 'count' => 10),
     ];
 
     return $element;
