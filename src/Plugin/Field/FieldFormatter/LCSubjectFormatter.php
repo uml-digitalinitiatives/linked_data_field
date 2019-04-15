@@ -9,17 +9,17 @@ use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Plugin implementation of the 'lcsubject_formatter_type' formatter.
+ * Plugin implementation of the 'lcsubject_formatter' formatter.
  *
  * @FieldFormatter(
- *   id = "lcsubject_formatter_type",
- *   label = @Translation("Lcsubject formatter type"),
+ *   id = "lcsubject_formatter",
+ *   label = @Translation("LC Subject formatter"),
  *   field_types = {
- *     "lcsubject_field_type"
+ *     "lcsubject_field"
  *   }
  * )
  */
-class LCSubjectFormatterType extends FormatterBase {
+class LCSubjectFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}

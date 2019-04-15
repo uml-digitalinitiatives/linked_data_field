@@ -11,17 +11,17 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
- * Plugin implementation of the 'lcsubject_field_type' field type.
+ * Plugin implementation of the 'lcsubject_field' field type.
  *
  * @FieldType(
- *   id = "lcsubject_field_type",
- *   label = @Translation("LC Subject Field Type"),
+ *   id = "lcsubject_field",
+ *   label = @Translation("LC Subject Field"),
  *   description = @Translation("Field for storing Library of Congress subject fields with lookup"),
- *   default_widget = "lcsubject_widget_type",
- *   default_formatter = "lcsubject_formatter_type"
+ *   default_widget = "lcsubject_widget",
+ *   default_formatter = "lcsubject_formatter"
  * )
  */
-class LCSubjectFieldType extends FieldItemBase {
+class LCSubjectField extends FieldItemBase {
 
   /**
    * {@inheritdoc}

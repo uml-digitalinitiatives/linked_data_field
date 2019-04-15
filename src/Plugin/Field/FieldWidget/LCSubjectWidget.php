@@ -7,17 +7,17 @@ use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Plugin implementation of the 'lcsubject_widget_type' widget.
+ * Plugin implementation of the 'lcsubject_widget' widget.
  *
  * @FieldWidget(
- *   id = "lcsubject_widget_type",
+ *   id = "lcsubject_widget",
  *   label = @Translation("LC Subject widget type"),
  *   field_types = {
- *     "lcsubject_field_type"
+ *     "lcsubject_field"
  *   }
  * )
  */
-class LCSubjectWidgetType extends WidgetBase {
+class LCSubjectWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
