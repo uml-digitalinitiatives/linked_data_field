@@ -1,0 +1,5 @@
+name: 'LC Subject Field'
+type: module
+description: 'Subjects that link to Library of Congress authority records'
+core: 8.x
+package: 'Islandora'

@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains lc_subject_field.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function lc_subject_field_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the lc_subject_field module.
+    case 'help.page.lc_subject_field':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Subjects that link to Library of Congress authority records') . '</p>';
+      return $output;
+
+    default:
+  }
+}
