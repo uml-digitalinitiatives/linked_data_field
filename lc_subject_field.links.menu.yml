@@ -1,0 +1,7 @@
+lc_subject_field.lc_lookup_settings_form:
+  title: 'LC Lookup Settings'
+  route_name: lc_subject_field.lc_lookup_settings_form
+  description: 'Settings for LC Authority lookup'
+  parent: system.admin_config_system
+  weight: 99
+

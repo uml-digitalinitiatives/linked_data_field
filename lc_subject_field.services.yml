@@ -1,0 +1,4 @@
+services:
+  lc_subject_field.lc_lookup:
+    class: Drupal\lc_subject_field\LCLookupService
+    arguments: ['@http_client']
