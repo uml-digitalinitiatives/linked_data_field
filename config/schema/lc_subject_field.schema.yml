@@ -1,0 +1,7 @@
+lc_subject_field.settings:
+  type: config_object
+  label: 'Settings'
+  mapping:
+    base_url:
+      type: uri
+      label: 'Base URL'

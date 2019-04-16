@@ -15,7 +15,7 @@ class LCLookupSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'lc_subject_field.lclookupsettings',
+      'lc_subject_field.settings',
     ];
   }
 
@@ -30,7 +30,7 @@ class LCLookupSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('lc_subject_field.lclookupsettings');
+    $config = $this->config('lc_subject_field.settings');
     $form['base_url'] = [
       '#type' => 'url',
       '#title' => $this->t('Base URL'),
@@ -53,7 +53,7 @@ class LCLookupSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
-    $this->config('lc_subject_field.lclookupsettings')
+    $this->config('lc_subject_field.settings')
       ->set('base_url', $form_state->getValue('base_url'))
       ->save();
   }
