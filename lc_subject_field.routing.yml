@@ -1,5 +1,5 @@
 lc_subject_field.autocomplete:
-  path: '/subject-lookup/{field_name}/{count}'
+  path: '/subject-lookup/{candidate}'
   defaults:
     _controller: '\Drupal\lc_subject_field\Controller\AutocompleteController::handleAutocomplete'
     _format: json

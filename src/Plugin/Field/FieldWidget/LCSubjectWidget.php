@@ -77,7 +77,7 @@ class LCSubjectWidget extends WidgetBase {
         '#placeholder' => $this->getSetting('placeholder'),
         '#maxlength' => $this->getFieldSetting('max_length'),
         '#autocomplete_route_name' => 'lc_subject_field.autocomplete',
-        '#autocomplete_route_parameters' => array('field_name' => 'lc_subject_field', 'count' => 10),
+        '#autocomplete_route_parameters' => array('candidate' => 'lc_subject_field'),
     ];
 
     return $element;
