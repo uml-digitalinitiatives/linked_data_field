@@ -57,11 +57,16 @@ class LCSubjectFormatter extends FormatterBase {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      $elements[$delta] = [
-        '#title' => $this->viewValue($item),
-        '#type' => 'link',
-        '#url' => Url::fromUri($item->url),
-      ];
+      try {
+        $url = Url::fromUri($item->url);
+        $elements[$delta] = [
+          '#title' => $this->viewValue($item),
+          '#type' => 'link',
+          '#url' => $url,
+        ];
+      } catch (\InvalidArgumentException $e) {
+        $elements[$delta] = ['#markup' => $this->viewValue($item)];
+      }
     }
 
     return $elements;
