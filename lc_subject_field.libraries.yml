@@ -1,0 +1,6 @@
+lc-autocomplete:
+  version: 1.x
+  js:
+    js/subject_autocomplete.js: {}
+  dependencies:
+    - core/jquery

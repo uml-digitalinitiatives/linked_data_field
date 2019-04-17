@@ -77,9 +77,23 @@ class LCSubjectWidget extends WidgetBase {
         '#placeholder' => $this->getSetting('placeholder'),
         '#maxlength' => $this->getFieldSetting('max_length'),
         '#autocomplete_route_name' => 'lc_subject_field.autocomplete',
-        '#autocomplete_route_parameters' => array('candidate' => 'lc_subject_field'),
+        '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
+        '#ajax' => [
+          'event' => 'autocomplete-select'
+        ],
     ];
-
+    $form['#attached']['library'][] = 'lc_subject_field/lc-autocomplete';
+    $element['url'] = $element + [
+      '#type' => 'textfield',
+        '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
+        '#size' => $this->getSettings('size'),
+        '#placeholder' => $this->getSetting('placeholder'),
+        '#maxlength' => $this->getFieldSetting('max_length'),
+        '#ajax' => [
+          'event' => 'autocomplete-select'
+        ]
+      ];
+    $element['url']['#attributes']['class'][] = 'subject-url-input';
     return $element;
   }
 
