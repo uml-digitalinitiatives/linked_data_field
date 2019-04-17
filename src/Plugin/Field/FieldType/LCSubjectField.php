@@ -108,13 +108,7 @@ class LCSubjectField extends FieldItemBase {
    * {@inheritdoc}
    */
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
-    return [
-      'prefix' => [
-        '#type' => 'textfield',
-        '#title' => $this->t('Prefix'),
-        '#description' => $this->t( 'Comma-delimited list of base subjects to limit the search to.'),
-      ],
-    ];
+
   }
 
   /**
