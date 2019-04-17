@@ -78,6 +78,7 @@ class LCSubjectWidget extends WidgetBase {
         '#size' => $this->getSetting('size'),
         '#placeholder' => $this->getSetting('placeholder'),
         '#maxlength' => $this->getFieldSetting('max_length'),
+        '#prefix' => '<div class="field__label">Subject name</div>',
         '#autocomplete_route_name' => 'lc_subject_field.autocomplete',
         '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
         '#ajax' => [
@@ -87,17 +88,16 @@ class LCSubjectWidget extends WidgetBase {
     $form['#attached']['library'][] = 'lc_subject_field/lc-autocomplete';
     $element['url'] = [
       '#type' => 'textfield',
-        '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
-        '#delta' => $delta,
-        '#size' => $this->getSettings('size'),
-        '#weight' => $element['#weight'],
-        '#maxlength' => $this->getFieldSetting('max_length'),
-//        '#ajax' => [
-//          'event' => 'autocomplete-select'
-//        ]
+      '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
+
+      '#delta' => $delta,
+      '#size' => $this->getSettings('size'),
+      '#prefix' => '<div class="field__label">URL</div>',
+      '#weight' => $element['#weight'],
+      '#maxlength' => $this->getFieldSetting('max_length'),
       ];
     $element['url']['#attributes']['class'][] = 'subject-url-input';
-ksm($element);
+
     return $element;
   }
 

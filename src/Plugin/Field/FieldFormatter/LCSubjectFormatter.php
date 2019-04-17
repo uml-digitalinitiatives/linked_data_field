@@ -7,6 +7,7 @@ use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Plugin implementation of the 'lcsubject_formatter' formatter.
@@ -56,7 +57,11 @@ class LCSubjectFormatter extends FormatterBase {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      $elements[$delta] = ['#markup' => $this->viewValue($item)];
+      $elements[$delta] = [
+        '#title' => $this->viewValue($item),
+        '#type' => 'link',
+        '#url' => Url::fromUri($item->url),
+      ];
     }
 
     return $elements;
