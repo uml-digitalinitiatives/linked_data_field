@@ -83,9 +83,9 @@ class LCSubjectWidget extends WidgetBase {
         ],
     ];
     $form['#attached']['library'][] = 'lc_subject_field/lc-autocomplete';
-    $element['url'] = $element + [
+    $element['url'] = [
       '#type' => 'textfield',
-        '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
+        //'#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
         '#size' => $this->getSettings('size'),
         '#placeholder' => $this->getSetting('placeholder'),
         '#maxlength' => $this->getFieldSetting('max_length'),
