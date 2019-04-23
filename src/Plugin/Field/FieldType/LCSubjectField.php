@@ -27,11 +27,7 @@ class LCSubjectField extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
-    return [
-      'max_length' => 255,
-      'is_ascii' => FALSE,
-      'case_sensitive' => FALSE,
-    ] + parent::defaultStorageSettings();
+    return parent::defaultStorageSettings();
   }
 
   /**
@@ -56,13 +52,13 @@ class LCSubjectField extends FieldItemBase {
     $schema = [
       'columns' => [
         'value' => [
-          'type' => $field_definition->getSetting('is_ascii') === TRUE ? 'varchar_ascii' : 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length'),
-          'binary' => $field_definition->getSetting('case_sensitive'),
+          'type' => 'varchar',
+          'length' => 200,
+          'binary' => FALSE,
         ],
         'url' => [
           'type' => 'varchar',
-          'length' => 512,
+          'length' => 100,
           'binary' => FALSE,
         ],
       ],
@@ -77,7 +73,7 @@ class LCSubjectField extends FieldItemBase {
   public function getConstraints() {
     $constraints = parent::getConstraints();
 
-    if ($max_length = $this->getSetting('max_length')) {
+    if ($max_length = 200) {
       $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
       $constraints[] = $constraint_manager->create('ComplexData', [
         'value' => [
@@ -100,35 +96,10 @@ class LCSubjectField extends FieldItemBase {
    */
   public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
     $random = new Random();
-    $values['value'] = $random->word(mt_rand(1, $field_definition->getSetting('max_length')));
+    $values['value'] = $random->word(mt_rand(1, 200));
     return $values;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
-
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
-    $elements = [];
-
-    $elements['max_length'] = [
-      '#type' => 'number',
-      '#title' => t('Maximum length'),
-      '#default_value' => $this->getSetting('max_length'),
-      '#required' => TRUE,
-      '#description' => t('The maximum length of the field in characters.'),
-      '#min' => 1,
-      '#disabled' => $has_data,
-    ];
-
-    return $elements;
-  }
 
   public static function mainPropertyName() {
     return 'value';
