@@ -2,17 +2,14 @@
 
 namespace Drupal\Tests\lc_subject_field\FunctionalJavascript;
 
-use Drupal\Core\Url;
-
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
-
 /**
- * Simple test to ensure that main page loads with module enabled.
+ * Test the subject autocomplete widget.
  *
  * @group lc_subject_field
  */
-class LoadTest extends WebDriverTestBase {
+class LCSubjectAutocompleteWidgetTest extends WebDriverTestBase {
 
   use LoginAdminTrait;
 
@@ -59,25 +56,38 @@ class LoadTest extends WebDriverTestBase {
   }
 
   /**
-   * Tests that the home page loads with a 200 response.
+   * Tests that autocomplete retrieves suggestions and
+   * that the URL field gets filled when an item is selected.
    */
-  public function testSubjectField() {
+  public function testSubjectFieldAutocomplete() {
     $this->drupalGet('admin/structure/types/manage/article');
-   // admin/structure/types/manage/article/fields/add-field
+
     static::fieldUIAddNewField('admin/structure/types/manage/article', 'subjects', 'Subjects', 'lcsubject_field', [
-//      'settings[target_type]' => 'paragraph',
       'cardinality' => '-1',
     ], []);
 
-//    $this->assertSession()->pageTextContains('');
     // Change the base URL to not hit id.loc.gov.
     $this->config('lc_subject_field.settings')->set('base_url', 'http://test.test/')->save();
     $this->drupalGet('node/add/article');
-    $this->getSession()->getPage()->fillField('Subject', 'a');
-    $this->triggerEventOn('input[name="field_subject[0][value]"]');
+    $page = $this->getSession()->getPage();
+
+    $assert_session = $this->assertSession();
+    $autocomplete_field = $assert_session->waitForElement('css', '[name="' . 'field_subject' . '[0][value]"].ui-autocomplete-input');
+    $autocomplete_field->setValue('a');
+
+    $this->getSession()->getDriver()->keyDown($autocomplete_field->getXpath(), 'a');
+    $assert_session->waitOnAutocomplete();
+
+    $results = $page->findAll('css', '.ui-autocomplete li');
+
+    $this->assertCount(2, $results);
+    $assert_session->pageTextContains('Apple');
+
+    // Select an element and check the URL gets filled.
+    $results[0]->click();
+    $assert_session->fieldValueEquals('field_subject[0][url]', 'http://nasa.gov/');
   }
-
-
+  
   /**
    * Creates a new field through the Field UI.
    * Borrowed from field_ui module tests.
@@ -134,23 +144,6 @@ class LoadTest extends WebDriverTestBase {
 
     // Check that the field appears in the overview form.
     $this->assertFieldByXPath('//table[@id="field-overview"]//tr/td[1]', $label);
-
-  }
-
-  public function triggerEventOn($css_selector){
-    $function =
-        '(function(){'
-        .'var element = document.querySelector("$css_selector");'
-        . 'var event = document.createEvent("Event");'
-        . 'event.initEvent('change', true, true);'
-        . 'element.dispatchEvent(event);'
-        . '})();';
-
-    try{
-      $this->getSession()->getDriver()->executeScript($function);
-    }catch (\Exception $e){
-
-    }
   }
 
 }
