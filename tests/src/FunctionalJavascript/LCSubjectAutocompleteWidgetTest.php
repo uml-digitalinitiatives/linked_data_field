@@ -87,7 +87,7 @@ class LCSubjectAutocompleteWidgetTest extends WebDriverTestBase {
     $results[0]->click();
     $assert_session->fieldValueEquals('field_subject[0][url]', 'http://nasa.gov/');
   }
-  
+
   /**
    * Creates a new field through the Field UI.
    * Borrowed from field_ui module tests.
