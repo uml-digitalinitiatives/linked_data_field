@@ -64,7 +64,8 @@ class LCSubjectFormatter extends FormatterBase {
           '#type' => 'link',
           '#url' => $url,
         ];
-      } catch (\InvalidArgumentException $e) {
+      }
+      catch (\InvalidArgumentException $e) {
         $elements[$delta] = ['#markup' => $this->viewValue($item)];
       }
     }
@@ -75,7 +76,7 @@ class LCSubjectFormatter extends FormatterBase {
   /**
    * Generate the output appropriate for one field item.
    *
-   * @param \Drupal\Core\Field\FieldItemInterface $item
+   * @param Drupal\Core\Field\FieldItemInterface $item
    *   One field item.
    *
    * @return string

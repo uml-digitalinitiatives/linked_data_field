@@ -124,14 +124,10 @@ class LCSubjectAutocompleteWidgetTest extends WebDriverTestBase {
     // First step: 'Add field' page.
     $this->drupalGet($bundle_path);
 
-
     $this->submitForm($initial_edit, "Save and continue");
     $initial_edit['field_name'] = 'subject';
     $this->submitForm($initial_edit, "Save and continue");
 
-    //return $this->getSession()->getPage()->getContent();
-
-    //$this->drupalPostForm($bundle_path, $initial_edit, t('Save and continue'));
     $this->assertRaw((string) t('These settings apply to the %label field everywhere it is used.', ['%label' => $label]));
 
     // Second step: 'Storage settings' form.

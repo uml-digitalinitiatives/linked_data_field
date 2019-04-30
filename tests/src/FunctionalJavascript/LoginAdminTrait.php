@@ -38,4 +38,5 @@ trait LoginAdminTrait {
     $this->drupalLogin($this->admin_user);
     return $this->admin_user;
   }
+
 }

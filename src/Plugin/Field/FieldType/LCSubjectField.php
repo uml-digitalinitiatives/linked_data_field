@@ -39,9 +39,11 @@ class LCSubjectField extends FieldItemBase {
       ->setLabel(new TranslatableMarkup('Text value'))
       ->setSetting('case_sensitive', $field_definition->getSetting('case_sensitive'))
       ->setRequired(TRUE);
+
     $properties['url'] = DataDefinition::create('string')
       ->setLabel('Subject URL')
       ->setRequired(FALSE);
+
     return $properties;
   }
 
@@ -100,7 +102,12 @@ class LCSubjectField extends FieldItemBase {
     return $values;
   }
 
-
+  /**
+   * Get property that this field considers it's 'main' value.
+   *
+   * @return string
+   *   The value field name.
+   */
   public static function mainPropertyName() {
     return 'value';
   }

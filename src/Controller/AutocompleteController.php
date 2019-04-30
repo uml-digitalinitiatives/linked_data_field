@@ -2,13 +2,12 @@
 
 namespace Drupal\lc_subject_field\Controller;
 
+use Drupal\Component\Utility\Tags;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\lc_subject_field\LCLookupServiceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Drupal\lc_subject_field\LCLookupServiceInterface;
-use Drupal\Component\Utility\Tags;
-use Drupal\Component\Utility\Unicode;
 
 /**
  * Class AutocompleteController.
@@ -18,12 +17,15 @@ class AutocompleteController extends ControllerBase {
   /**
    * Service to do LC Subject lookups.
    *
-   * @var \Drupal\lc_subject_field\LCLookupServiceInterface
+   * @var Drupal\lc_subject_field\LCLookupServiceInterface
    */
   protected $lcLookup;
 
   /**
-   * Constructs a new AutocompleteController object.
+   * AutocompleteController constructor.
+   *
+   * @param Drupal\lc_subject_field\LCLookupServiceInterface $lc_lookup_service
+   *   The lookup service to query against.
    */
   public function __construct(LCLookupServiceInterface $lc_lookup_service) {
     $this->lcLookup = $lc_lookup_service;
