@@ -23,7 +23,7 @@ class LCSubjectAutocompleteWidgetTest extends WebDriverTestBase {
     'field',
     'field_ui',
     'link',
-    'lc_subject_field'
+    'lc_subject_field',
   ];
 
   /**
@@ -36,13 +36,13 @@ class LCSubjectAutocompleteWidgetTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp()
-  {
+  protected function setUp() {
     parent::setUp();
     $this->user = $this->loginAsAdmin([
       'administer content types',
       'administer node fields',
-      'administer node form display',]);
+      'administer node form display',
+    ]);
 
     // Create an article content type that we will use for testing.
     $type = $this->container->get('entity_type.manager')->getStorage('node_type')

@@ -10,25 +10,25 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Plugin implementation of the 'lcsubject_formatter' formatter.
+ * Plugin implementation of the 'grid_formatter' formatter.
  *
  * @FieldFormatter(
- *   id = "lcsubject_formatter",
- *   label = @Translation("LC Subject formatter"),
+ *   id = "grid_formatter",
+ *   label = @Translation("Grid Field formatter"),
  *   field_types = {
- *     "lcsubject_field"
+ *     "grid_field"
  *   }
  * )
  */
-class LCSubjectFormatter extends FormatterBase {
+class GridFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
    */
   public static function defaultSettings() {
     return [
-      // Implement default settings.
-    ] + parent::defaultSettings();
+        // Implement default settings.
+      ] + parent::defaultSettings();
   }
 
   /**
@@ -36,8 +36,8 @@ class LCSubjectFormatter extends FormatterBase {
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     return [
-      // Implement settings form.
-    ] + parent::settingsForm($form, $form_state);
+        // Implement settings form.
+      ] + parent::settingsForm($form, $form_state);
   }
 
   /**

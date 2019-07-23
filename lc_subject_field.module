@@ -8,15 +8,7 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
- * Implementaiton of hook_help().
- *
- * @param string $route_name
- *   Route to return help text for.
- * @param Drupal\Core\Routing\RouteMatchInterface $route_match
- *   Route matching service.
- *
- * @return string
- *   Help text.
+ * Implements hook_help().
  */
 function lc_subject_field_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {

@@ -16,3 +16,18 @@ lc_subject_field.lc_lookup_settings_form:
   options:
     _admin_route: TRUE
 
+grid_field.autocomplete:
+  path: '/grid-lookup'
+  defaults:
+    _controller: '\Drupal\lc_subject_field\Controller\AutocompleteController::handleGridAutocomplete'
+    _format: json
+  requirements:
+    _role: 'authenticated'
+
+funder_field.autocomplete:
+  path: '/funder-lookup'
+  defaults:
+    _controller: '\Drupal\lc_subject_field\Controller\AutocompleteController::handleFunderAutocomplete'
+    _format: json
+  requirements:
+    _role: 'authenticated'

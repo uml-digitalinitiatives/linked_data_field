@@ -5,3 +5,9 @@ lc_subject_field.settings:
     base_url:
       type: uri
       label: 'Base URL'
+    grid_url:
+      type: uri
+      label: 'Wikidata URL'
+    funder_url:
+      type: uri
+      label: 'Funder URL'

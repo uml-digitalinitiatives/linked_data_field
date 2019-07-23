@@ -10,17 +10,17 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
- * Plugin implementation of the 'lcsubject_field' field type.
+ * Plugin implementation of the 'funder_field' field type.
  *
  * @FieldType(
- *   id = "lcsubject_field",
- *   label = @Translation("LC Subject Field"),
- *   description = @Translation("Field for storing Library of Congress subject fields with lookup"),
- *   default_widget = "lcsubject_widget",
- *   default_formatter = "lcsubject_formatter"
+ *   id = "funder_field",
+ *   label = @Translation("Crossref Funder Field"),
+ *   description = @Translation("Field for storing GRID Identifiers fields with lookup"),
+ *   default_widget = "funder_widget",
+ *   default_formatter = "funder_formatter"
  * )
  */
-class LCSubjectField extends FieldItemBase {
+class FunderField extends FieldItemBase {
 
   /**
    * {@inheritdoc}
@@ -95,7 +95,7 @@ class LCSubjectField extends FieldItemBase {
   }
 
   /**
-   * Get property that this field considers it's 'main' value.
+   * Get property that this field considers its 'main' value.
    *
    * @return string
    *   The value field name.

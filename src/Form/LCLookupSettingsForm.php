@@ -37,14 +37,19 @@ class LCLookupSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Service endpoint URL'),
       '#default_value' => $config->get('base_url'),
     ];
+    $form['grid_url'] = [
+      '#type' => 'url',
+      '#title' => $this->t('Wikidata URL'),
+      '#description' => $this->t('URL to wikidata SPARQL endpoint'),
+      '#default_value' => $config->get('grid_url'),
+    ];
+    $form['funder_url'] = [
+      '#type' => 'url',
+      '#title' => $this->t('Crossref URL'),
+      '#description' => $this->t('URL to Crossref endpopint'),
+      '#default_value' => $config->get('funder_url'),
+    ];
     return parent::buildForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
   }
 
   /**
@@ -55,6 +60,8 @@ class LCLookupSettingsForm extends ConfigFormBase {
 
     $this->config('lc_subject_field.settings')
       ->set('base_url', $form_state->getValue('base_url'))
+      ->set('grid_url', $form_state->getValue('grid_url'))
+      ->set('funder_url', $form_state->getValue('funder_url'))
       ->save();
   }
 
