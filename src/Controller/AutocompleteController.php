@@ -78,8 +78,9 @@ class AutocompleteController extends ControllerBase {
       $items = $this->lcLookup->getGridSuggestions($input);
       foreach ($items as $item) {
         $label = $item->orglabel->value;
+        $url = "https://www.grid.ac/institutes/{$item->grid->value}";
         $output[] = [
-          'value' => $item->grid->value,
+          'value' => $url,
           'label' => $label,
         ];
       }

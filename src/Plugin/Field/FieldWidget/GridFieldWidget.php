@@ -44,7 +44,7 @@ class GridFieldWidget extends WidgetBase {
       '#type' => 'textfield',
       '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
       '#delta' => $delta,
-      '#size' => 20,
+      '#size' => 200,
       '#prefix' => '<div class="field__label">GRID Identifier</div>',
       '#weight' => $element['#weight'],
       '#maxlength' => 200,
