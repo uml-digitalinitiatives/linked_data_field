@@ -42,7 +42,7 @@ class LCLookupService implements LCLookupServiceInterface {
    * @return array|false
    *   The set of suggested subjects from the API.
    */
-  public function getSuggestions(string $candidate) {
+  public function getSuggestions($candidate) {
     // Get base URL from config.
     $config = $this->configFactory->get('lc_subject_field.settings');
     $base_url = $config->get('base_url');
