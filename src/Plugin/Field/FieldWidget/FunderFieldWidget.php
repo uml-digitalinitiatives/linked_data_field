@@ -7,17 +7,17 @@ use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Plugin implementation of the 'lcsubject_widget' widget.
+ * Plugin implementation of the 'funder_widget' widget.
  *
  * @FieldWidget(
- *   id = "lcsubject_widget",
- *   label = @Translation("LC Subject widget type"),
+ *   id = "funder_widget",
+ *   label = @Translation("Crossref Funder widget type"),
  *   field_types = {
- *     "lcsubject_field"
+ *     "funder_field"
  *   }
  * )
  */
-class LCSubjectWidget extends WidgetBase {
+class FunderFieldWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
@@ -30,7 +30,7 @@ class LCSubjectWidget extends WidgetBase {
       '#description' => $this->t('Subject field'),
       '#maxlength' => 200,
       '#prefix' => '<div class="field__label">Subject name</div>',
-      '#autocomplete_route_name' => 'lc_subject_field.autocomplete',
+      '#autocomplete_route_name' => 'funder_field.autocomplete',
       '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
       '#size' => 200,
       '#ajax' => [
@@ -44,11 +44,12 @@ class LCSubjectWidget extends WidgetBase {
       '#type' => 'textfield',
       '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
       '#delta' => $delta,
-      '#size' => 200,
-      '#prefix' => '<div class="field__label">URL</div>',
+      '#size' => 40,
+      '#prefix' => '<div class="field__label">Crossref Funder DOI</div>',
       '#weight' => $element['#weight'],
       '#maxlength' => 200,
     ];
+
     $element['url']['#attributes']['class'][] = 'subject-url-input';
 
     return $element;

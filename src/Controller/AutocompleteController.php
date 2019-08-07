@@ -41,15 +41,15 @@ class AutocompleteController extends ControllerBase {
   }
 
   /**
-   * Hello.
+   * Autocomplete controller.
    *
-   * @param Request $request
-   *   The page request object
-   * @param candidate
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The page request object.
+   *
    * @return string
    *   Return Hello string.
    */
-  public function handleAutocomplete(Request $request, $candidate) {
+  public function handleAutocomplete(Request $request) {
     $results = [];
 
     if ($input = $request->query->get('q')) {
@@ -60,8 +60,58 @@ class AutocompleteController extends ControllerBase {
         $results[] = ['value' => $url, 'label' => $subject];
       }
     }
-      return new JsonResponse($results);
+    return new JsonResponse($results);
+  }
 
+  /**
+   * Autocomplete Controller for GRID requests.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The page request object.
+   *
+   * @return string
+   *   Return Hello string.
+   */
+  public function handleGridAutocomplete(Request $request) {
+    $output = [];
+    if ($input = $request->query->get('q')) {
+      $items = $this->lcLookup->getGridSuggestions($input);
+      foreach ($items as $item) {
+        $label = $item->orglabel->value;
+        $url = "https://www.grid.ac/institutes/{$item->grid->value}";
+        $output[] = [
+          'value' => $url,
+          'label' => $label,
+        ];
+      }
+    }
+    return new JsonResponse($output);
+  }
+
+  /**
+   * Autocomplete Controller for Crossref Funder requests.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The page request object.
+   *
+   * @return string
+   *   Return Hello string.
+   */
+  public function handleFunderAutocomplete(Request $request) {
+    $output = [];
+    if ($input = $request->query->get('q')) {
+      $items = $this->lcLookup->getFunderSuggestion($input);
+      foreach ($items as $item) {
+
+        $output[] = [
+          'value' => $item->uri,
+          'label' => $item->name,
+        ];
+      }
+    }
+    return new JsonResponse($output);
   }
 
 }
+// Todo on Monday
+// Add routes, build service, add fields to config.
