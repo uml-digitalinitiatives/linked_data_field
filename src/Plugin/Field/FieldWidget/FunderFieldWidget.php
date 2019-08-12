@@ -29,7 +29,7 @@ class FunderFieldWidget extends WidgetBase {
       '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
       '#description' => $this->t('Subject field'),
       '#maxlength' => 200,
-      '#prefix' => '<div class="field__label">Subject name</div>',
+      '#prefix' => '<div class="field__label">Funder</div>',
       '#autocomplete_route_name' => 'funder_field.autocomplete',
       '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
       '#size' => 200,
