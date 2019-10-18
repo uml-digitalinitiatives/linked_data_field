@@ -34,7 +34,7 @@ class FunderFieldWidget extends WidgetBase {
       '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
       '#size' => 200,
       '#ajax' => [
-        'event' => 'autocomplete-select',
+        'event' => 'autocomplete-close',
       ],
     ];
 
