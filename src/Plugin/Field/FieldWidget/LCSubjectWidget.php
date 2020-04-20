@@ -32,7 +32,7 @@ class LCSubjectWidget extends WidgetBase {
       '#prefix' => '<div class="field__label">Subject name</div>',
       '#autocomplete_route_name' => 'lc_subject_field.autocomplete',
       '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
-      '#size' => 200,
+      '#size' => 60,
       '#ajax' => [
         'event' => 'autocomplete-close',
       ],
@@ -44,7 +44,7 @@ class LCSubjectWidget extends WidgetBase {
       '#type' => 'textfield',
       '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
       '#delta' => $delta,
-      '#size' => 200,
+      '#size' => 60,
       '#prefix' => '<div class="field__label">URL</div>',
       '#weight' => $element['#weight'],
       '#maxlength' => 200,

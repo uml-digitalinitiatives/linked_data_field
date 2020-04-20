@@ -28,11 +28,11 @@ class FunderFieldWidget extends WidgetBase {
       '#type' => 'textfield',
       '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
       '#description' => $this->t('Subject field'),
-      '#maxlength' => 200,
+      '#size' => 60,
+      '#maxlength' => 120,
       '#prefix' => '<div class="field__label">Funding Organization</div>',
       '#autocomplete_route_name' => 'funder_field.autocomplete',
       '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
-      '#size' => 200,
       '#ajax' => [
         'event' => 'autocomplete-close',
       ],
@@ -44,10 +44,10 @@ class FunderFieldWidget extends WidgetBase {
       '#type' => 'textfield',
       '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
       '#delta' => $delta,
-      '#size' => 40,
       '#prefix' => '<div class="field__label">Crossref Funder DOI</div>',
       '#weight' => $element['#weight'],
-      '#maxlength' => 200,
+      '#size' => 60,
+      '#maxlength' => 128,
     ];
 
     $element['url']['#attributes']['class'][] = 'subject-url-input';
