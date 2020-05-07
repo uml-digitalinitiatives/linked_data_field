@@ -12,7 +12,7 @@ endpoints can be added by following the plugin pattern.
 The authority link is then stored along with the chosen
 item.
 
-[1]: http://rdm-upei.researchspaces.ca/node/6
+[1]: http://id.loc.gov/authorities/subjects.html
 
 [2]: https://www.grid.ac
 
