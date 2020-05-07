@@ -1,31 +1,51 @@
-# LC Subject Field
+# Linked Data Field
 
-Provides a field with autocomplete functionality that 
-pulls subject names and URLs from the Library of Congress API
-https://id.loc.gov/
+Provides an autocomplete field widget that
+pulls suggested matches and URLs from various authoritative
+sources.
+
+The module supports [Library of Congress Subject Headings][1],
+[Global Research Identifier Database (GRID)][2] entries,
+and [CrossRef Funder identifiers][3] out of the box. More
+endpoints can be added by following the plugin pattern.
+
+The authority link is then stored along with the chosen
+item.
+
+[1]: http://rdm-upei.researchspaces.ca/node/6
+
+[2]: https://www.grid.ac
+
+[3]: https://www.crossref.org/services/funder-registry/
 
 ## Installation
 
 Enable the module as you normally would.
 
 By default the LC Subjects API is set to http://id.loc.gov.
-If you want to chagne this for whtever reason you can go to
-/admin/config/lc_subject_field/settings.
+If you want to change this for whatever reason you can go to
+/admin/config/linked_data_field/settings.
 
-Add the Subject field to the desired content type(s).
+Add one of the Linked Data Fields to a content type.
 
-## Maintainers
+## Authors
 
-Alexander O'Neill https://drupal.org/u/alxp
+Alexander O'Neill (Maintainer) https://drupal.org/u/alxp
 
-### Supporting Organization
+Alan Stanley (Major improvements) https://drupal.org/u/Alan_Stanley
 
-University of Prince Edward Island Robertson Library https://library.upei.ca/
+## Supporting Organization
 
-Islandora Foundation https://islandora.ca/
+[University of Prince Edward Island Robertson Library][4]
 
-CANARIE https://www.canarie.ca/
+Development was funded as part of a grant from [CANARIE][4]
 
-### Special Thanks
+[4]: https://library.upei.ca/
 
-Chrisina Harlow's LC Reconcile Google Refine plugin https://github.com/cmharlow/lc-reconcile
+[5]: https://www.canarie.ca/
+
+## Special Thanks
+
+Christina Harlow's [LC Reconcile][6] Google Refine plugin was the inspiration for this module.
+
+[6]: https://github.com/cmharlow/lc-reconcile

@@ -1,14 +1,14 @@
 {
-  "name": "drupal/lc_subject_field",
+  "name": "drupal/linked_data_field",
   "type": "drupal-module",
   "description": "Subjects that link to Library of Congress authority records",
   "keywords": ["Drupal"],
   "license": "GPL-2.0+",
-  "homepage": "https://www.drupal.org/project/lc_subject_field",
+  "homepage": "https://www.drupal.org/project/linked_data_field",
   "minimum-stability": "dev",
   "support": {
-    "issues": "https://www.drupal.org/project/issues/lc_subject_field",
-    "source": "http://cgit.drupalcode.org/lc_subject_field"
+    "issues": "https://www.drupal.org/project/issues/linked_data_field",
+    "source": "http://cgit.drupalcode.org/linked_data_field"
   },
   "require": { }
 }

@@ -7,5 +7,5 @@ package: 'Islandora'
 # Information added by Drupal.org packaging script on 2019-05-02
 version: '8.x-1.0-beta1'
 core: '8.x'
-project: 'lc_subject_field'
+project: 'linked_data_field'
 datestamp: 1556824385

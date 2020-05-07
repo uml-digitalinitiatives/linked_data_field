@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\lc_subject_field\Plugin\Field\FieldWidget;
+namespace Drupal\linked_data_field\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
@@ -31,14 +31,14 @@ class GridFieldWidget extends WidgetBase {
       '#maxlength' => 200,
       '#prefix' => '<div class="field__label">Name of institution</div>',
       '#autocomplete_route_name' => 'grid_field.autocomplete',
-      '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
+      '#autocomplete_route_parameters' => ['candidate' => 'linked_data_field'],
       '#size' => 200,
       '#ajax' => [
         'event' => 'autocomplete-close',
       ],
     ];
 
-    $form['#attached']['library'][] = 'lc_subject_field/lc-autocomplete';
+    $form['#attached']['library'][] = 'linked_data_field/ld-autocomplete';
 
     $element['url'] = [
       '#type' => 'textfield',

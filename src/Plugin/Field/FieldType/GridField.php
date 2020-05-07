@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\lc_subject_field\Plugin\Field\FieldType;
+namespace Drupal\linked_data_field\Plugin\Field\FieldType;
 
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Field\FieldDefinitionInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\lc_subject_field\Plugin\Field\FieldFormatter;
+namespace Drupal\linked_data_field\Plugin\Field\FieldFormatter;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemInterface;

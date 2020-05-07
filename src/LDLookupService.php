@@ -1,14 +1,14 @@
 <?php
 
-namespace Drupal\lc_subject_field;
+namespace Drupal\linked_data_field;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use GuzzleHttp\ClientInterface;
 
 /**
- * Class LCLookupService.
+ * Class LDLookupService.
  */
-class LCLookupService implements LCLookupServiceInterface {
+class LDLookupService implements LDLookupServiceInterface {
 
   /**
    * Configuration service.
@@ -26,7 +26,7 @@ class LCLookupService implements LCLookupServiceInterface {
   protected $httpClient;
 
   /**
-   * Constructs a new LCLookupService object.
+   * Constructs a new LDLookupService object.
    */
   public function __construct(ClientInterface $http_client, ConfigFactoryInterface $config_factory) {
     $this->httpClient = $http_client;
@@ -44,7 +44,7 @@ class LCLookupService implements LCLookupServiceInterface {
    */
   public function getSuggestions($candidate) {
     // Get base URL from config.
-    $config = $this->configFactory->get('lc_subject_field.settings');
+    $config = $this->configFactory->get('linked_data_field.settings');
     $base_url = $config->get('base_url');
     // For automated testing.
     if ((string) $base_url == 'http://test.test/') {
@@ -92,7 +92,7 @@ class LCLookupService implements LCLookupServiceInterface {
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function getGridSuggestions(string $candidate) {
-    $config = $this->configFactory->get('lc_subject_field.settings');
+    $config = $this->configFactory->get('linked_data_field.settings');
     $sparql_endpoint = $config->get('grid_url');
     $input = strtolower($candidate);
     $query = <<< QUERY
@@ -106,7 +106,7 @@ WHERE
   union
     {
   ?org wdt:P2427 ?grid.
-       ?org skos:altLabel ?orglabel 
+       ?org skos:altLabel ?orglabel
    }
   FILTER CONTAINS(lcase(?orglabel), '$input') .
   FILTER(lang(?orglabel) = 'en')
@@ -139,7 +139,7 @@ QUERY;
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function getFunderSuggestion(string $input) {
-    $config = $this->configFactory->get('lc_subject_field.settings');
+    $config = $this->configFactory->get('linked_data_field.settings');
     $crossref_endpoint = $config->get('funder_url');
     $response = $this->httpClient->request('GET', $crossref_endpoint, [
       'query' => [

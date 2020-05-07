@@ -1,15 +1,15 @@
-lc_subject_field.autocomplete:
+linked_data_field.autocomplete:
   path: '/subject-lookup/{candidate}'
   defaults:
-    _controller: '\Drupal\lc_subject_field\Controller\AutocompleteController::handleAutocomplete'
+    _controller: '\Drupal\linked_data_field\Controller\AutocompleteController::handleAutocomplete'
     _format: json
   requirements:
     _role: 'authenticated'
 
-lc_subject_field.lc_lookup_settings_form:
-  path: '/admin/config/lc_subject_field/settings'
+linked_data_field.ld_lookup_settings_form:
+  path: '/admin/config/linked_data_field/settings'
   defaults:
-    _form: '\Drupal\lc_subject_field\Form\LCLookupSettingsForm'
+    _form: '\Drupal\linked_data_field\Form\LCLookupSettingsForm'
     _title: 'LCLookupSettingsForm'
   requirements:
     _permission: 'access administration pages'
@@ -19,7 +19,7 @@ lc_subject_field.lc_lookup_settings_form:
 grid_field.autocomplete:
   path: '/grid-lookup'
   defaults:
-    _controller: '\Drupal\lc_subject_field\Controller\AutocompleteController::handleGridAutocomplete'
+    _controller: '\Drupal\linked_data_field\Controller\AutocompleteController::handleGridAutocomplete'
     _format: json
   requirements:
     _role: 'authenticated'
@@ -27,7 +27,7 @@ grid_field.autocomplete:
 funder_field.autocomplete:
   path: '/funder-lookup'
   defaults:
-    _controller: '\Drupal\lc_subject_field\Controller\AutocompleteController::handleFunderAutocomplete'
+    _controller: '\Drupal\linked_data_field\Controller\AutocompleteController::handleFunderAutocomplete'
     _format: json
   requirements:
     _role: 'authenticated'

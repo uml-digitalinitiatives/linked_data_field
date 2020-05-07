@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\lc_subject_field\FunctionalJavascript;
+namespace Drupal\Tests\linked_data_field\FunctionalJavascript;
 
 /**
  * Test trait for logging admin in JS tests.

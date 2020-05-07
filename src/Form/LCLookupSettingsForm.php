@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\lc_subject_field\Form;
+namespace Drupal\linked_data_field\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -15,7 +15,7 @@ class LCLookupSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'lc_subject_field.settings',
+      'linked_data_field.settings',
     ];
   }
 
@@ -23,14 +23,14 @@ class LCLookupSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'lc_lookup_settings_form';
+    return 'ld_lookup_settings_form';
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('lc_subject_field.settings');
+    $config = $this->config('linked_data_field.settings');
     $form['base_url'] = [
       '#type' => 'url',
       '#title' => $this->t('Base URL'),
@@ -58,7 +58,7 @@ class LCLookupSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
-    $this->config('lc_subject_field.settings')
+    $this->config('linked_data_field.settings')
       ->set('base_url', $form_state->getValue('base_url'))
       ->set('grid_url', $form_state->getValue('grid_url'))
       ->set('funder_url', $form_state->getValue('funder_url'))

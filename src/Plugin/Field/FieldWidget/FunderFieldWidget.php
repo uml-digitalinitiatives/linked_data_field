@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\lc_subject_field\Plugin\Field\FieldWidget;
+namespace Drupal\linked_data_field\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
@@ -32,13 +32,13 @@ class FunderFieldWidget extends WidgetBase {
       '#maxlength' => 120,
       '#prefix' => '<div class="field__label">Funding Organization</div>',
       '#autocomplete_route_name' => 'funder_field.autocomplete',
-      '#autocomplete_route_parameters' => ['candidate' => 'lc_subject_field'],
+      '#autocomplete_route_parameters' => ['candidate' => 'linked_data_field'],
       '#ajax' => [
         'event' => 'autocomplete-close',
       ],
     ];
 
-    $form['#attached']['library'][] = 'lc_subject_field/lc-autocomplete';
+    $form['#attached']['library'][] = 'linked_data_field/ld-autocomplete';
 
     $element['url'] = [
       '#type' => 'textfield',

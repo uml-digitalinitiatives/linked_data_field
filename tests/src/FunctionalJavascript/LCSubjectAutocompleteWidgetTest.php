@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\Tests\lc_subject_field\FunctionalJavascript;
+namespace Drupal\Tests\linked_data_field\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
 /**
  * Test the subject autocomplete widget.
  *
- * @group lc_subject_field
+ * @group linked_data_field
  */
 class LCSubjectAutocompleteWidgetTest extends WebDriverTestBase {
 
@@ -23,7 +23,7 @@ class LCSubjectAutocompleteWidgetTest extends WebDriverTestBase {
     'field',
     'field_ui',
     'link',
-    'lc_subject_field',
+    'linked_data_field',
   ];
 
   /**
@@ -67,7 +67,7 @@ class LCSubjectAutocompleteWidgetTest extends WebDriverTestBase {
     ], []);
 
     // Change the base URL to not hit id.loc.gov.
-    $this->config('lc_subject_field.settings')->set('base_url', 'http://test.test/')->save();
+    $this->config('linked_data_field.settings')->set('base_url', 'http://test.test/')->save();
     $this->drupalGet('node/add/article');
     $page = $this->getSession()->getPage();
 

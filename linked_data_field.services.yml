@@ -1,0 +1,4 @@
+services:
+  linked_data_field.ld_lookup:
+    class: Drupal\linked_data_field\LDLookupService
+    arguments: ['@http_client', '@config.factory']

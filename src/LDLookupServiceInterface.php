@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\lc_subject_field;
+namespace Drupal\linked_data_field;
 
 /**
- * Interface LCLookupServiceInterface.
+ * Interface LDLookupServiceInterface.
  */
-interface LCLookupServiceInterface {
+interface LDLookupServiceInterface {
 
   /**
    * Return suggestions from the lookup service API based on given input.

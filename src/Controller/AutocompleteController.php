@@ -1,10 +1,10 @@
 <?php
 
-namespace Drupal\lc_subject_field\Controller;
+namespace Drupal\linked_data_field\Controller;
 
 use Drupal\Component\Utility\Tags;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\lc_subject_field\LCLookupServiceInterface;
+use Drupal\linked_data_field\LDLookupServiceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,18 +17,18 @@ class AutocompleteController extends ControllerBase {
   /**
    * Service to do LC Subject lookups.
    *
-   * @var Drupal\lc_subject_field\LCLookupServiceInterface
+   * @var Drupal\linked_data_field\LDLookupServiceInterface
    */
-  protected $lcLookup;
+  protected $ldLookup;
 
   /**
    * AutocompleteController constructor.
    *
-   * @param Drupal\lc_subject_field\LCLookupServiceInterface $lc_lookup_service
+   * @param Drupal\linked_data_field\LDLookupServiceInterface $ld_lookup_service
    *   The lookup service to query against.
    */
-  public function __construct(LCLookupServiceInterface $lc_lookup_service) {
-    $this->lcLookup = $lc_lookup_service;
+  public function __construct(LDLookupServiceInterface $ld_lookup_service) {
+    $this->ldLookup = $ld_lookup_service;
   }
 
   /**
@@ -36,7 +36,7 @@ class AutocompleteController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('lc_subject_field.lc_lookup')
+      $container->get('linked_data_field.ld_lookup')
     );
   }
 
@@ -55,7 +55,7 @@ class AutocompleteController extends ControllerBase {
     if ($input = $request->query->get('q')) {
       $typed_string = Tags::explode($input);
       $typed_string = mb_strtolower(array_pop($typed_string));
-      $service_results = $this->lcLookup->getSuggestions($typed_string);
+      $service_results = $this->ldLookup->getSuggestions($typed_string);
       foreach ($service_results as $subject => $url) {
         $results[] = ['value' => $url, 'label' => $subject];
       }
@@ -75,7 +75,7 @@ class AutocompleteController extends ControllerBase {
   public function handleGridAutocomplete(Request $request) {
     $output = [];
     if ($input = $request->query->get('q')) {
-      $items = $this->lcLookup->getGridSuggestions($input);
+      $items = $this->ldLookup->getGridSuggestions($input);
       foreach ($items as $item) {
         $label = $item->orglabel->value;
         $url = "https://www.grid.ac/institutes/{$item->grid->value}";
@@ -100,7 +100,7 @@ class AutocompleteController extends ControllerBase {
   public function handleFunderAutocomplete(Request $request) {
     $output = [];
     if ($input = $request->query->get('q')) {
-      $items = $this->lcLookup->getFunderSuggestion($input);
+      $items = $this->ldLookup->getFunderSuggestion($input);
       foreach ($items as $item) {
 
         $output[] = [
