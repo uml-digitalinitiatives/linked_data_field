@@ -1,0 +1,5 @@
+entity.linked_data_endpoint.add_form:
+  route_name: entity.linked_data_endpoint.add_form
+  title: 'Add Linked Data Lookup Endpoint'
+  appears_on:
+    - entity.linked_data_endpoint.collection

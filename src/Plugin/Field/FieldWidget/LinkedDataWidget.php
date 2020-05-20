@@ -10,14 +10,14 @@ use Drupal\Core\Form\FormStateInterface;
  * Plugin implementation of the 'grid_widget' widget.
  *
  * @FieldWidget(
- *   id = "grid_widget",
- *   label = @Translation("GRID Identifier widget type"),
+ *   id = "linked_data_widget",
+ *   label = @Translation("Linked Data Lookup Widget"),
  *   field_types = {
- *     "grid_field"
+ *     "linked_data_field"
  *   }
  * )
  */
-class GridFieldWidget extends WidgetBase {
+class LinkedDataWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
@@ -29,7 +29,7 @@ class GridFieldWidget extends WidgetBase {
         '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
         '#description' => $this->t('Subject field'),
         '#maxlength' => 200,
-        '#prefix' => '<div class="field__label">Name of institution</div>',
+        '#prefix' => '<div class="field__label">Linked Data Field Label</div>',
         '#autocomplete_route_name' => 'grid_field.autocomplete',
         '#autocomplete_route_parameters' => ['candidate' => 'linked_data_field'],
         '#size' => 200,
@@ -45,7 +45,7 @@ class GridFieldWidget extends WidgetBase {
       '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
       '#delta' => $delta,
       '#size' => 200,
-      '#prefix' => '<div class="field__label">GRID Identifier</div>',
+      '#prefix' => '<div class="field__label">LD Field Label</div>',
       '#weight' => $element['#weight'],
       '#maxlength' => 200,
     ];

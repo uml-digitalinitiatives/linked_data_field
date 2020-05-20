@@ -5,3 +5,11 @@ linked_data_field.lc_lookup_settings_form:
   parent: system.admin_config_system
   weight: 99
 
+
+# Linked Data Lookup Endpoint menu items definition
+entity.linked_data_endpoint.collection:
+  title: 'Linked Data Lookup Endpoint'
+  route_name: entity.linked_data_endpoint.collection
+  description: 'List Linked Data Lookup Endpoint (bundles)'
+  parent: system.admin_structure
+  weight: 99

@@ -11,3 +11,11 @@ linked_data_field.settings:
     funder_url:
       type: uri
       label: 'Funder URL'
+field.field_settings.linked_data_field:
+  type: mapping
+  label: 'Linked data field settings'
+  mapping:
+    source:
+      type: string
+      label: 'Data source'
+

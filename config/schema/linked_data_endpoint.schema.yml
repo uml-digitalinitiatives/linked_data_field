@@ -1,0 +1,21 @@
+linked_data_field.linked_data_endpoint.*:
+  type: config_entity
+  label: 'Linked Data Lookup Endpoint config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    base_url:
+      type: string
+      label: 'Endpoint base URL'
+    label_key:
+      type: string
+      label: 'Name JSON key'
+    url_key:
+      type: string
+      label: 'URL JSON key'
+    uuid:
+      type: string
