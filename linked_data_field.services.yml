@@ -2,3 +2,6 @@ services:
   linked_data_field.ld_lookup:
     class: Drupal\linked_data_field\LDLookupService
     arguments: ['@http_client', '@config.factory']
+  plugin.manager.linked_data_endpoint_type_plugin:
+    class: Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginManager
+    parent: default_plugin_manager

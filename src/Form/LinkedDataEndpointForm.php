@@ -4,6 +4,8 @@ namespace Drupal\linked_data_field\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class LinkedDataEndpointForm.
@@ -11,10 +13,23 @@ use Drupal\Core\Form\FormStateInterface;
 class LinkedDataEndpointForm extends EntityForm {
 
   /**
+   * @var \Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginManager
+   */
+  protected $endpointTypePluginManager;
+
+  /**
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
+
+    $plugins = $this->endpointTypePluginManager->getDefinitions();
+
+    $options = [];
+
+    foreach ($plugins as $plugin_id => $plugin) {
+      $options[$plugin_id] = $plugin['label'];
+    }
 
     $linked_data_endpoint = $this->entity;
     $form['label'] = [
@@ -24,6 +39,14 @@ class LinkedDataEndpointForm extends EntityForm {
       '#default_value' => $linked_data_endpoint->label(),
       '#description' => $this->t("Label for the Linked Data Lookup Endpoint."),
       '#required' => TRUE,
+    ];
+
+    $form['type'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Endpoint type'),
+      '#description' => $this->t('The plugin to construct the query.'),
+      '#options' => $options,
+      '#default_value' => $linked_data_endpoint->get('type'),
     ];
 
     $form['id'] = [
@@ -85,6 +108,23 @@ class LinkedDataEndpointForm extends EntityForm {
         ]));
     }
     $form_state->setRedirectUrl($linked_data_endpoint->toUrl('collection'));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container, $container->get('plugin.manager.linked_data_endpoint_type_plugin'));
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   * @param \Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginManager $endpoint_type
+   */
+  public function __construct(ContainerInterface $container, LinkedDataEndpointTypePluginManager $endpoint_type) {
+    $this->endpointTypePluginManager = $endpoint_type;
   }
 
 }
