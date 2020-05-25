@@ -6,6 +6,7 @@ use Drupal\Component\Utility\Tags;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\linked_data_field\Entity\LinkedDataEndpointInterface;
 use Drupal\linked_data_field\LDLookupServiceInterface;
+use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,20 @@ class AutocompleteController extends ControllerBase {
   protected $ldLookup;
 
   /**
+   * The plugin manager for endpoint types.
+   *
+   * @var \Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginManager
+   */
+  protected $ldEntityTypePluginManager;
+
+  /**
    * AutocompleteController constructor.
    *
    * @param Drupal\linked_data_field\LDLookupServiceInterface $ld_lookup_service
    *   The lookup service to query against.
    */
-  public function __construct(LDLookupServiceInterface $ld_lookup_service) {
-    $this->ldLookup = $ld_lookup_service;
+  public function __construct(LinkedDataEndpointTypePluginManager $ld_entity_type_plugin_manager) {
+    $this->ldEntityTypePluginManager = $ld_entity_type_plugin_manager;
   }
 
   /**
@@ -37,7 +45,7 @@ class AutocompleteController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('linked_data_field.ld_lookup')
+      $container->get('plugin.manager.linked_data_endpoint_type_plugin')
     );
   }
 
@@ -54,7 +62,7 @@ class AutocompleteController extends ControllerBase {
     $results = [];
     $endpoint_id = array_pop(explode('/', $request->getPathInfo()));
     $endpoint = $this->entityTypeManager()->getStorage('linked_data_endpoint')->load($endpoint_id);
-
+    $plugin = $this->ldEntityTypePluginManager->createInstance($endpoint->get('type'), ['endpoint' => $endpoint]);
     if ($input = $request->query->get('q')) {
       $typed_string = Tags::explode($input);
       $typed_string = mb_strtolower(array_pop($typed_string));

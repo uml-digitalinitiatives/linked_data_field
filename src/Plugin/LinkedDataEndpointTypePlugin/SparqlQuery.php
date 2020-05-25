@@ -1,8 +1,8 @@
 <?php
 
-namespace \Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePlugin;
+namespace Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePlugin;
 
-use \Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginBase;
+use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginBase;
 
 /**
  * Class URLArgument
