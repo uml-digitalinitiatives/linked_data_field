@@ -8,6 +8,9 @@ linked_data_field.linked_data_endpoint.*:
     label:
       type: label
       label: 'Label'
+    type:
+      type: string
+      label: 'Endpoint Type'
     base_url:
       type: string
       label: 'Endpoint base URL'

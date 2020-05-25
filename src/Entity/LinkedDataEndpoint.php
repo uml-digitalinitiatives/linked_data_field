@@ -28,6 +28,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     "id" = "id",
  *     "label" = "label",
  *     "uuid" = "uuid",
+ *     "type" = "type",
  *     "base_url" = "base_url",
  *     "label_key" = "label_key",
  *     "url_key" = "url_key"

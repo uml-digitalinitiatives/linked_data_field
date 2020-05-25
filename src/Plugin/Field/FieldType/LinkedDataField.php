@@ -134,14 +134,18 @@ class LinkedDataField extends FieldItemBase {
     $element = [];
     // The key of the element should be the setting name
     $settings = $this->getSettings();
+
+    $e = array_keys(\Drupal::entityQuery('linked_data_endpoint')->execute());
+
+    $entities = \Drupal::entityTypeManager()->getStorage('linked_data_endpoint')->loadMultiple($e);
+    $options = [];
+    foreach ($entities as $entity_id => $entity) {
+      $options[$entity_id] = $entity->label();
+    }
     $element['source'] = [
       '#title' => $this->t('Data source'),
       '#type' => 'select',
-      '#options' => [
-        'lc_subjects' => $this->t('Library of Congress Subject Headings'),
-        'funder' => $this->t('Crossref Funder'),
-        'grid' => $this->t('GRID Identifier'),
-      ],
+      '#options' => $options,
       '#default_value' => $settings['source'],
     ];
 
