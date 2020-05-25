@@ -23,6 +23,7 @@ class LinkedDataWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+    $source = $items->getSetting('source');
 
     $element['value'] = $element + [
         '#type' => 'textfield',
@@ -30,8 +31,8 @@ class LinkedDataWidget extends WidgetBase {
         '#description' => $this->t('Subject field'),
         '#maxlength' => 200,
         '#prefix' => '<div class="field__label">Linked Data Field Label</div>',
-        '#autocomplete_route_name' => 'grid_field.autocomplete',
-        '#autocomplete_route_parameters' => ['candidate' => 'linked_data_field'],
+        '#autocomplete_route_name' => 'linked_data_lookup.autocomplete',
+        '#autocomplete_route_parameters' => ['linked_data_endpoint' => $source],
         '#size' => 200,
         '#ajax' => [
           'event' => 'autocomplete-close',

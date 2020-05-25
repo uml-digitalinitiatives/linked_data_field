@@ -4,6 +4,7 @@ namespace Drupal\linked_data_field\Controller;
 
 use Drupal\Component\Utility\Tags;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\linked_data_field\Entity\LinkedDataEndpointInterface;
 use Drupal\linked_data_field\LDLookupServiceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -49,8 +50,10 @@ class AutocompleteController extends ControllerBase {
    * @return string
    *   Return Hello string.
    */
-  public function handleAutocomplete(Request $request) {
+  public function handleAutocomplete(LinkedDataEndpointInterface $linked_data_endpoint = NULL, Request $request = NULL) {
     $results = [];
+    $endpoint_id = array_pop(explode('/', $request->getPathInfo()));
+    $endpoint = $this->entityTypeManager()->getStorage('linked_data_endpoint')->load($endpoint_id);
 
     if ($input = $request->query->get('q')) {
       $typed_string = Tags::explode($input);

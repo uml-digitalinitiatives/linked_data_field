@@ -6,6 +6,18 @@ linked_data_field.autocomplete:
   requirements:
     _role: 'authenticated'
 
+linked_data_lookup.autocomplete:
+  path: '/linked-data-lookup/{linked_data_endpoint}'
+  defaults:
+    _controller: '\Drupal\linked_data_field\Controller\AutocompleteController::handleAutocomplete'
+    _format: json
+  options:
+    parameters:
+      linked_data_endpoint:
+        type: entity:linked_data_endpoint
+  requirements:
+    _role: 'authenticated'
+
 linked_data_field.ld_lookup_settings_form:
   path: '/admin/config/linked_data_field/settings'
   defaults:
