@@ -72,7 +72,7 @@ If a response looks like:
       }
     ]
 
-Then then the "Label key" config entity field would be "label", and the
+Then you can use the default URL Argument plugin, and the "Label key" config entity field would be "label", and the
 "URL key" config entity field would be "url".
 
 If the result has arrays instead of keys, e.g.
