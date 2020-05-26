@@ -63,10 +63,11 @@ class AutocompleteController extends ControllerBase {
     $endpoint_id = array_pop(explode('/', $request->getPathInfo()));
     $endpoint = $this->entityTypeManager()->getStorage('linked_data_endpoint')->load($endpoint_id);
     $plugin = $this->ldEntityTypePluginManager->createInstance($endpoint->get('type'), ['endpoint' => $endpoint]);
+
     if ($input = $request->query->get('q')) {
       $typed_string = Tags::explode($input);
       $typed_string = mb_strtolower(array_pop($typed_string));
-      $service_results = $this->ldLookup->getSuggestions($typed_string);
+      $service_results = $plugin->getSuggestions($typed_string);
       foreach ($service_results as $subject => $url) {
         $results[] = ['value' => $url, 'label' => $subject];
       }

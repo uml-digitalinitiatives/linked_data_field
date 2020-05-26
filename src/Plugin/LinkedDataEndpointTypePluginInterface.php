@@ -9,7 +9,15 @@ use Drupal\Component\Plugin\PluginInspectionInterface;
  */
 interface LinkedDataEndpointTypePluginInterface extends PluginInspectionInterface {
 
-
-  // Add get/set methods for your plugin type here.
+  /**
+   * Return suggestions from the lookup service API.
+   *
+   * @param string $candidate
+   *   The input string to get suggestions based on.
+   *
+   * @return mixed
+   *   Array of suggestions from the API.
+   */
+  public function getSuggestions($candidate);
 
 }
