@@ -42,6 +42,9 @@ class LinkedDataEndpointForm extends EntityForm {
       '#description' => $this->t('The plugin to construct the query.'),
       '#options' => $options,
       '#default_value' => $linked_data_endpoint->get('type'),
+      '#attributes' => [
+        'name' => 'linked-data-plugin-type',
+      ],
     ];
 
     $form['id'] = [
@@ -87,7 +90,13 @@ class LinkedDataEndpointForm extends EntityForm {
       $form[$plugin_name] = [
         '#type' => 'fieldset',
         '#title' => $this->t("@label settings", ['@label' => $plugin_label]),
+        '#collapsible' => TRUE,
         '#tree' => TRUE,
+        '#states' => [
+          'visible' => [
+            ':input[name="linked-data-plugin-type"]' => ['value' => $plugin_name],
+          ],
+        ],
       ];
       $plugin_settings = $instance->getSettingsFormItems($form, $form_state, $third_party_settings);
       foreach($plugin_settings as $plugin_setting_name => $plugin_setting) {
