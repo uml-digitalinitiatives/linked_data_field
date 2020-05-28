@@ -2,6 +2,7 @@
 
 namespace Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePlugin;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginBase;
 
 /**
@@ -37,8 +38,11 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
       urlencode($candidate));
     $response = json_decode($request->getBody());
     $combined_results = array_combine($response[$endpoint->get('label_key')], $response[$endpoint->get('url_key')]);
+
     return $combined_results;
   }
 
-
+  function getSettingsFormItems(array &$form, FormStateInterface $form_state, $plugin_settings) {
+    // TODO: Implement getSettingsFormItems() method.
+  }
 }

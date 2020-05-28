@@ -7,12 +7,15 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+
 
 /**
  * Base class for Linked data endpoint type plugin plugins.
  */
 abstract class LinkedDataEndpointTypePluginBase extends PluginBase implements LinkedDataEndpointTypePluginInterface, ContainerFactoryPluginInterface {
 
+  use StringTranslationTrait;
 
   /**
    * Configuration service.

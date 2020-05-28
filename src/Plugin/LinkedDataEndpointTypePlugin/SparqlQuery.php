@@ -2,6 +2,7 @@
 
 namespace Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePlugin;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginBase;
 
 /**
@@ -61,4 +62,16 @@ QUERY;
     return $output;
   }
 
+  public function getSettingsFormItems(array &$form, FormStateInterface $form_state, $plugin_settings) {
+    $endpoint = $this->configuration['endpoint'];
+
+    return ['sparql_query' =>
+      [
+        '#type' => 'textarea',
+        '#title' => $this->t('SPARQL Query'),
+        '#description' => $this->t('SPARQL Query to return array with label and URL values for candidate string.'),
+        '#default_value' => $plugin_settings['sparql_query-sparql_query'],
+      ]
+    ];
+  }
 }

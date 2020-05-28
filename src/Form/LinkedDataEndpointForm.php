@@ -23,15 +23,10 @@ class LinkedDataEndpointForm extends EntityForm {
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    $plugins = $this->endpointTypePluginManager->getDefinitions();
-
-    $options = [];
-
-    foreach ($plugins as $plugin_id => $plugin) {
-      $options[$plugin_id] = $plugin['label'];
-    }
+    $options = $this->getEndpointPlugins();
 
     $linked_data_endpoint = $this->entity;
+
     $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
@@ -85,6 +80,21 @@ class LinkedDataEndpointForm extends EntityForm {
 
     ];
 
+    // Get third-party settings form items.
+    foreach ($options as $plugin_name => $plugin_label) {
+      $instance = $this->endpointTypePluginManager->createInstance($plugin_name, ['endpoint' => $linked_data_endpoint]);
+      $third_party_settings = $linked_data_endpoint->getThirdPartySettings('linked_data_field');
+      $form[$plugin_name] = [
+        '#type' => 'fieldset',
+        '#title' => $this->t("@label settings", ['@label' => $plugin_label]),
+        '#tree' => TRUE,
+      ];
+      $plugin_settings = $instance->getSettingsFormItems($form, $form_state, $third_party_settings);
+      foreach($plugin_settings as $plugin_setting_name => $plugin_setting) {
+        $form[$plugin_name][$plugin_setting_name] = $plugin_setting;
+      }
+    }
+
     return $form;
   }
 
@@ -92,22 +102,25 @@ class LinkedDataEndpointForm extends EntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-    $linked_data_endpoint = $this->entity;
-    $status = $linked_data_endpoint->save();
+
+    $this->savePluginSettings($form_state);
+
+    $status = $this->entity->save();
+
 
     switch ($status) {
       case SAVED_NEW:
         $this->messenger()->addMessage($this->t('Created the %label Linked Data Lookup Endpoint.', [
-          '%label' => $linked_data_endpoint->label(),
+          '%label' => $this->entity->label(),
         ]));
         break;
 
       default:
         $this->messenger()->addMessage($this->t('Saved the %label Linked Data Lookup Endpoint.', [
-          '%label' => $linked_data_endpoint->label(),
+          '%label' => $this->entity->label(),
         ]));
     }
-    $form_state->setRedirectUrl($linked_data_endpoint->toUrl('collection'));
+    $form_state->setRedirectUrl($this->entity->toUrl('collection'));
   }
 
   /**
@@ -125,6 +138,34 @@ class LinkedDataEndpointForm extends EntityForm {
    */
   public function __construct(ContainerInterface $container, LinkedDataEndpointTypePluginManager $endpoint_type) {
     $this->endpointTypePluginManager = $endpoint_type;
+  }
+
+  /**
+   * @return array
+   */
+  protected function getEndpointPlugins(): array {
+    $plugins = $this->endpointTypePluginManager->getDefinitions();
+
+    $options = [];
+
+    foreach ($plugins as $plugin_id => $plugin) {
+      $options[$plugin_id] = $plugin['label'];
+    }
+    return $options;
+  }
+
+  /**
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   */
+  protected function savePluginSettings(FormStateInterface $form_state): void {
+    $linked_data_endpoint = $this->entity;
+    $plugins = $this->getEndpointPlugins();
+    $values = $form_state->getValues();
+    foreach ($plugins as $plugin_name => $plugin_label) {
+      foreach ($values[$plugin_name] as $plugin_setting_name => $plugin_setting_value) {
+        $linked_data_endpoint->setThirdPartySetting('linked_data_field', $plugin_name . '-' . $plugin_setting_name, $plugin_setting_value);
+      }
+    }
   }
 
 }

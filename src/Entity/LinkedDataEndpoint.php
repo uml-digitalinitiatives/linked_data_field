@@ -58,4 +58,14 @@ class LinkedDataEndpoint extends ConfigEntityBase implements LinkedDataEndpointI
    */
   protected $label;
 
+  /**
+   * {@inheritdoc}
+   */
+  public function save() {
+
+
+
+    parent::save();
+  }
+
 }
