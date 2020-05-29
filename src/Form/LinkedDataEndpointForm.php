@@ -102,7 +102,47 @@ class LinkedDataEndpointForm extends EntityForm {
       foreach($plugin_settings as $plugin_setting_name => $plugin_setting) {
         $form[$plugin_name][$plugin_setting_name] = $plugin_setting;
       }
+
+
     }
+
+    $form['sample-query'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Run a sample query'),
+    ];
+
+    $form['sample-query']['candidate'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Sample search'),
+      '#description' => $this->t('Enter a string to run your query with.'),
+    ];
+    $form['sample-query']['run-query'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'input',
+      '#attributes' => [
+        'type' => 'button',
+        'value' => $this->t("Run query"),
+        'class' => 'button',
+        'name' => 'runquery_button',
+      ],
+      '#attached' => [
+        'library' => [
+          'linked_data_field/run-query',
+        ],
+        'drupalSettings' => [
+          'linkedDataField' => [
+            'runQuery' => [
+              'endPointName' => $linked_data_endpoint->id(),
+            ]
+          ]
+        ],
+      ],
+    ];
+
+    $form['sample-query']['results'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("Query results"),
+    ];
 
     return $form;
   }

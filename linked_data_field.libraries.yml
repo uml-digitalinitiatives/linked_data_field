@@ -4,3 +4,10 @@ ld-autocomplete:
     js/subject_autocomplete.js: {}
   dependencies:
     - core/jquery
+run-query:
+  version: 1.x
+  js:
+    js/ld_run_query.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery

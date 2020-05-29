@@ -21,25 +21,7 @@ class SparqlQuery extends LinkedDataEndpointTypePluginBase {
     $endpoint = $this->configuration['endpoint'];
     $sparql_endpoint = $endpoint->get('base_url');
     $input = strtolower($candidate);
-    $query = <<< QUERY
-SELECT DISTINCT ?org ?grid ?orglabel
-WHERE
-{
-  {
-  ?org wdt:P2427 ?grid.
-       ?org rdfs:label ?orglabel
-   }
-  union
-    {
-  ?org wdt:P2427 ?grid.
-       ?org skos:altLabel ?orglabel
-   }
-  FILTER CONTAINS(lcase(?orglabel), '$input') .
-  FILTER(lang(?orglabel) = 'en')
-}
-LIMIT 10
-
-QUERY;
+    $query = $this->t($endpoint->configuration['sparql_query'], ['%input', $candidate]);
     $response = $this->httpClient->request('GET', $sparql_endpoint,
       [
         'headers' => [
@@ -69,7 +51,7 @@ QUERY;
       [
         '#type' => 'textarea',
         '#title' => $this->t('SPARQL Query'),
-        '#description' => $this->t('SPARQL Query to return array with label and URL values for candidate string.'),
+        '#description' => $this->t('SPARQL Query to return array with label and URL values for candidate string. Use "@input" to insert the string being searched for.'),
         '#default_value' => $plugin_settings['sparql_query-sparql_query'],
       ]
     ];
