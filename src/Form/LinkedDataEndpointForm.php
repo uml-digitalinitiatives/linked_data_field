@@ -99,10 +99,11 @@ class LinkedDataEndpointForm extends EntityForm {
         ],
       ];
       $plugin_settings = $instance->getSettingsFormItems($form, $form_state, $third_party_settings);
-      foreach($plugin_settings as $plugin_setting_name => $plugin_setting) {
-        $form[$plugin_name][$plugin_setting_name] = $plugin_setting;
+      if (!empty($plugin_settings)) {
+        foreach ($plugin_settings as $plugin_setting_name => $plugin_setting) {
+          $form[$plugin_name][$plugin_setting_name] = $plugin_setting;
+        }
       }
-
 
     }
 

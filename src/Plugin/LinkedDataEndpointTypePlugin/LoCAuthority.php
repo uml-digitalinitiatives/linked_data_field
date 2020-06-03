@@ -10,15 +10,15 @@ use Rs\Json\Pointer\NonexistentValueReferencedException;
 
 
 /**
- * Class URLArgument
+ * Class LoCAuthority
  *
  * @LinkedDataEndpointTypePlugin(
- *   id = "url_argument",
- *   label = @Translation("URL ARgument type"),
- *   description = @Translation("Query is simply added to the end of a URL endpoint.")
+ *   id = "lc_authority",
+ *   label = @Translation("LoC Authority Field"),
+ *   description = @Translation("Handles LoC's column-based response format.")
  * )
  */
-class URLArgument extends LinkedDataEndpointTypePluginBase {
+class LoCAuthority extends URLArgument {
 
 
   /**
@@ -45,13 +45,10 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
     return $this->parseResponse($response, $endpoint);
   }
 
-
-
-  function getSettingsFormItems(array &$form, FormStateInterface $form_state, $plugin_settings) {
-    // TODO: Implement getSettingsFormItems() method.
-  }
-
   /**
+   * LoC data is in a funny format with all labels in one array
+   * and all URL identifiers in a separate array.
+   *
    * @param $response
    * @param $endpoint
    *
@@ -59,8 +56,7 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
    */
   protected function parseResponse($response, $endpoint) {
     $combined_results = array_combine($response[$endpoint->get('label_key')], $response[$endpoint->get('url_key')]);
-    $p = new Pointer($response);
-    $p->get($endpoint->get['label_key']);
+
     return $combined_results;
   }
 }

@@ -36,8 +36,9 @@ class SparqlQuery extends LinkedDataEndpointTypePluginBase {
 
 
     $items = $data->results->bindings;
-$label_key = $endpoint->get('label_key');
-$url_key = $endpoint->get('url_key');
+    $label_key = $endpoint->get('label_key');
+    $url_key = $endpoint->get('url_key');
+
     foreach ($items as $item) {
       $label = $item->{$label_key}->value;
       $url = "https://www.grid.ac/institutes/{$item->{$url_key}->value}";
