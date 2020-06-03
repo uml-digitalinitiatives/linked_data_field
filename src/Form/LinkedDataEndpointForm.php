@@ -42,9 +42,9 @@ class LinkedDataEndpointForm extends EntityForm {
       '#description' => $this->t('The plugin to construct the query.'),
       '#options' => $options,
       '#default_value' => $linked_data_endpoint->get('type'),
-      '#attributes' => [
-        'name' => 'linked-data-plugin-type',
-      ],
+//      '#attributes' => [
+//        'name' => 'linked-data-plugin-type',
+//      ],
     ];
 
     $form['id'] = [
@@ -94,7 +94,7 @@ class LinkedDataEndpointForm extends EntityForm {
         '#tree' => TRUE,
         '#states' => [
           'visible' => [
-            ':input[name="linked-data-plugin-type"]' => ['value' => $plugin_name],
+            ':input[id="edit-type"]' => ['value' => $plugin_name],
           ],
         ],
       ];
