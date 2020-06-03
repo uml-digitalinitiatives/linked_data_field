@@ -27,19 +27,3 @@ linked_data_field.ld_lookup_settings_form:
     _permission: 'access administration pages'
   options:
     _admin_route: TRUE
-
-grid_field.autocomplete:
-  path: '/grid-lookup'
-  defaults:
-    _controller: '\Drupal\linked_data_field\Controller\AutocompleteController::handleGridAutocomplete'
-    _format: json
-  requirements:
-    _role: 'authenticated'
-
-funder_field.autocomplete:
-  path: '/funder-lookup'
-  defaults:
-    _controller: '\Drupal\linked_data_field\Controller\AutocompleteController::handleFunderAutocomplete'
-    _format: json
-  requirements:
-    _role: 'authenticated'
