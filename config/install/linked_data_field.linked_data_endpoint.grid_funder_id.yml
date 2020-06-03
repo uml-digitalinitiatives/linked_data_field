@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  linked_data_field:
+    sparql_query-sparql_query: "SELECT DISTINCT ?org ?grid ?orglabel\r\nWHERE\r\n{\r\n  {\r\n  ?org wdt:P2427 ?grid.\r\n       ?org rdfs:label ?orglabel\r\n   }\r\n  union\r\n    {\r\n  ?org wdt:P2427 ?grid.\r\n       ?org skos:altLabel ?orglabel\r\n   }\r\n  FILTER CONTAINS(lcase(?orglabel), '@input') .\r\n  FILTER(lang(?orglabel) = 'en')\r\n}\r\nLIMIT 10\r\n"
+id: grid_funder_id
+label: 'GRID Funder ID'
+type: sparql_query
+base_url: 'https://query.wikidata.org/sparql'
+label_key: orglabel
+url_key: org

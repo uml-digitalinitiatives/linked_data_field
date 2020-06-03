@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  linked_data_field:
+    sparql_query-sparql_query: ''
+id: library_of_congress_subject_headings
+label: 'Library of Congress Subject Headings'
+type: lc_authority
+base_url: 'http://id.loc.gov/authorities/subjects/suggest/?q='
+label_key: '1'
+url_key: '3'
