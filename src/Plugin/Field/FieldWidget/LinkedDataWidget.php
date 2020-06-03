@@ -28,9 +28,9 @@ class LinkedDataWidget extends WidgetBase {
     $element['value'] = $element + [
         '#type' => 'textfield',
         '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
-        '#description' => $this->t('Subject field'),
+        '#description' => $this->t('Autocomplete field'),
         '#maxlength' => 200,
-        '#prefix' => '<div class="field__label">Linked Data Field Label</div>',
+        '#prefix' => '<div class="field__label">' . $items->getFieldDefinition()->label() . '</div>',
         '#autocomplete_route_name' => 'linked_data_lookup.autocomplete',
         '#autocomplete_route_parameters' => ['linked_data_endpoint' => $source],
         '#size' => 200,
@@ -38,7 +38,7 @@ class LinkedDataWidget extends WidgetBase {
           'event' => 'autocomplete-close',
         ],
       ];
-
+    unset($element['value']['#title']);
     $form['#attached']['library'][] = 'linked_data_field/ld-autocomplete';
 
     $element['url'] = [
@@ -46,7 +46,7 @@ class LinkedDataWidget extends WidgetBase {
       '#default_value' => isset($items[$delta]->url) ? $items[$delta]->url : NULL,
       '#delta' => $delta,
       '#size' => 200,
-      '#prefix' => '<div class="field__label">LD Field Label</div>',
+      '#prefix' => '<div class="field__label">Definition URL</div>',
       '#weight' => $element['#weight'],
       '#maxlength' => 200,
     ];
