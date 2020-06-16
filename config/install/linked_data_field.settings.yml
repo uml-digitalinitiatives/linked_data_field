@@ -1,3 +1,0 @@
-base_url: "http://id.loc.gov/"
-grid_url: "https://query.wikidata.org/sparql"
-funder_url: "https://api.crossref.org/funders"

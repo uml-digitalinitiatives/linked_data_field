@@ -30,6 +30,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     "uuid" = "uuid",
  *     "type" = "type",
  *     "base_url" = "base_url",
+ *     "result_json_path" = "result_json_path",
  *     "label_key" = "label_key",
  *     "url_key" = "url_key"
  *   },

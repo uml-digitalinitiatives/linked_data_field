@@ -14,6 +14,9 @@ linked_data_field.linked_data_endpoint.*:
     base_url:
       type: string
       label: 'Endpoint base URL'
+    result_json_path:
+      type: string
+      label: 'Result Items JSON Path'
     label_key:
       type: string
       label: 'Name JSON key'

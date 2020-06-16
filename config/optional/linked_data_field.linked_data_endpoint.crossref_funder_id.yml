@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  linked_data_field:
+    sparql_query-sparql_query: ''
+id: crossref_funder_id
+label: 'Crossref Funder ID'
+type: url_argument
+base_url: 'https://api.crossref.org/funders?query='
+result_json_path: message.items
+label_key: name
+url_key: uri

@@ -68,62 +68,11 @@ class AutocompleteController extends ControllerBase {
       $typed_string = Tags::explode($input);
       $typed_string = mb_strtolower(array_pop($typed_string));
       $service_results = $plugin->getSuggestions($typed_string);
-      foreach ($service_results as $subject => $url) {
-        $results[] = ['value' => $url, 'label' => $subject];
+      foreach ($service_results as $label => $url) {
+        $results[] = ['value' => $url, 'label' => $label];
       }
     }
     return new JsonResponse($results);
   }
 
-  /**
-   * Autocomplete Controller for GRID requests.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The page request object.
-   *
-   * @return string
-   *   Return Hello string.
-   */
-  public function handleGridAutocomplete(Request $request) {
-    $output = [];
-    if ($input = $request->query->get('q')) {
-      $items = $this->ldLookup->getGridSuggestions($input);
-      foreach ($items as $item) {
-        $label = $item->orglabel->value;
-        $url = "https://www.grid.ac/institutes/{$item->grid->value}";
-        $output[] = [
-          'value' => $url,
-          'label' => $label,
-        ];
-      }
-    }
-    return new JsonResponse($output);
-  }
-
-  /**
-   * Autocomplete Controller for Crossref Funder requests.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The page request object.
-   *
-   * @return string
-   *   Return Hello string.
-   */
-  public function handleFunderAutocomplete(Request $request) {
-    $output = [];
-    if ($input = $request->query->get('q')) {
-      $items = $this->ldLookup->getFunderSuggestion($input);
-      foreach ($items as $item) {
-
-        $output[] = [
-          'value' => $item->uri,
-          'label' => $item->name,
-        ];
-      }
-    }
-    return new JsonResponse($output);
-  }
-
 }
-// Todo on Monday
-// Add routes, build service, add fields to config.

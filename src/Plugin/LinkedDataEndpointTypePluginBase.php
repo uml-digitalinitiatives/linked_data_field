@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 
+
 /**
  * Base class for Linked data endpoint type plugin plugins.
  */

@@ -42,9 +42,6 @@ class LinkedDataEndpointForm extends EntityForm {
       '#description' => $this->t('The plugin to construct the query.'),
       '#options' => $options,
       '#default_value' => $linked_data_endpoint->get('type'),
-//      '#attributes' => [
-//        'name' => 'linked-data-plugin-type',
-//      ],
     ];
 
     $form['id'] = [
@@ -65,6 +62,14 @@ class LinkedDataEndpointForm extends EntityForm {
       '#required' => TRUE,
     ];
 
+    $form['result_json_path'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Result record JSON path'),
+      '#description' => $this->t('The <a href="https://jmespath.org/specification
+.html#grammar">JMESPath expression</a> to get to the root of a result record. E.g., "result.records".'),
+      '#default_value' => $linked_data_endpoint->get('result_json_path'),
+    ];
+
     $form['label_key'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label JSON key'),
@@ -78,7 +83,7 @@ class LinkedDataEndpointForm extends EntityForm {
       '#type' => 'textfield',
       '#title' => $this->t('URL JSON key'),
       '#maxlength' => '50',
-      '#description' => $this->t('The JSON key that holds the canonical item URL.'),
+      '#description' => $this->t('The JSON key that holds the canonical item URL.  Can be a string or a numeric index. Can also be a <a href="https://jmespath.org/specification.html#grammar">JMESPath expression</a>.'),
       '#default_value' => $linked_data_endpoint->get('url_key'),
 
     ];

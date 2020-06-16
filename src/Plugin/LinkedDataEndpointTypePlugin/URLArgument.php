@@ -4,17 +4,13 @@ namespace Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePlugin;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginBase;
-use Rs\Json\Pointer;
-use Rs\Json\Pointer\InvalidJsonException;
-use Rs\Json\Pointer\NonexistentValueReferencedException;
-
-
+use JmesPath\Env as JM;
 /**
  * Class URLArgument
  *
  * @LinkedDataEndpointTypePlugin(
  *   id = "url_argument",
- *   label = @Translation("URL ARgument type"),
+ *   label = @Translation("URL Argument type"),
  *   description = @Translation("Query is simply added to the end of a URL endpoint.")
  * )
  */
@@ -45,12 +41,6 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
     return $this->parseResponse($response, $endpoint);
   }
 
-
-
-  function getSettingsFormItems(array &$form, FormStateInterface $form_state, $plugin_settings) {
-    // TODO: Implement getSettingsFormItems() method.
-  }
-
   /**
    * @param $response
    * @param $endpoint
@@ -58,9 +48,16 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
    * @return array|false
    */
   protected function parseResponse($response, $endpoint) {
-    $combined_results = array_combine($response[$endpoint->get('label_key')], $response[$endpoint->get('url_key')]);
-    $p = new Pointer($response);
-    $p->get($endpoint->get['label_key']);
-    return $combined_results;
+    $root = $endpoint->get('result_json_path');
+    $data = JM::search($root, $response);
+
+    $output = [];
+    $label_key = $endpoint->get('label_key');
+    $url_key = $endpoint->get('url_key');
+
+    foreach ($data as $i => $result) {
+      $output[$result->{$label_key}] = $result->{$url_key};
+    }
+    return $output;
   }
 }

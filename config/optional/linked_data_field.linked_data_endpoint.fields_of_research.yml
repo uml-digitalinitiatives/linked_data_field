@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  linked_data_field:
+    sparql_query-sparql_query: "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\r\nSELECT DISTINCT ?term ?concept ?prefLabel\r\n WHERE  {\r\n   {\r\n     ?concept skos:prefLabel ?term .\r\n   } UNION {\r\n     ?concept skos:altLabel ?term .\r\n   } .\r\n  FILTER (contains(lcase(str(?term)), \"@input\")) .\r\n   ?concept skos:prefLabel ?prefLabel .\r\n   FILTER (langMatches(lang(?prefLabel), \"en\")) .\r\n }\r\n ORDER BY ?prefLabel\r\nLIMIT 30"
+id: fields_of_research
+label: 'Australian and New Zealand Standard Research Classification'
+type: sparql_query
+base_url: 'http://vocabs.ands.org.au/repository/api/sparql/anzsrc-for'
+label_key: prefLabel
+url_key: concept
