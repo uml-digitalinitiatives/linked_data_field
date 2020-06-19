@@ -10,5 +10,7 @@
     "issues": "https://www.drupal.org/project/issues/linked_data_field",
     "source": "http://cgit.drupalcode.org/linked_data_field"
   },
-  "require": { }
+  "require": {
+    "mtdowling/jmespath.php": "^2.5"
+  }
 }

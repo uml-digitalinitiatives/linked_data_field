@@ -4,6 +4,7 @@ namespace Drupal\linked_data_field\Plugin;
 
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -72,6 +73,10 @@ abstract class LinkedDataEndpointTypePluginBase extends PluginBase implements Li
    */
   public function getSuggestions($candidate) {
 
+  }
+
+  public function getSettingsFormItems(array &$form, FormStateInterface $form_state, $plugin_settings) {
+    // TODO: Implement getSettingsFormItems() method.
   }
 
   /**
