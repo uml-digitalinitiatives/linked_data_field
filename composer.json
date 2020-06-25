@@ -1,11 +1,24 @@
 {
   "name": "drupal/linked_data_field",
   "type": "drupal-module",
-  "description": "Subjects that link to Library of Congress authority records",
+  "description": "Query SPARQL and other endpoints as autocomplete sources",
   "keywords": ["Drupal"],
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "homepage": "https://www.drupal.org/project/linked_data_field",
   "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Alexander O'Neill (alxp)",
+      "email": "aloneill@gmail.com",
+      "homepage": "https://www.drupal.org/u/alxp",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Alan Stanley (Alan_Stanley)",
+      "homepage": "https://www.drupal.org/u/Alan_Stanley",
+      "role": "Contributor"
+    }
+  ],
   "support": {
     "issues": "https://www.drupal.org/project/issues/linked_data_field",
     "source": "http://cgit.drupalcode.org/linked_data_field"
