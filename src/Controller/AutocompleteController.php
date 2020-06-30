@@ -60,7 +60,7 @@ class AutocompleteController extends ControllerBase {
    */
   public function handleAutocomplete(LinkedDataEndpointInterface $linked_data_endpoint = NULL, Request $request = NULL) {
     $results = [];
-    $endpoint_id = array_pop(explode('/', $request->getPathInfo()));
+    $endpoint_id = array_slice(explode('/', $request->getPathInfo()), -1)[0];
     $endpoint = $this->entityTypeManager()->getStorage('linked_data_endpoint')->load($endpoint_id);
     $plugin = $this->ldEntityTypePluginManager->createInstance($endpoint->get('type'), ['endpoint' => $endpoint]);
 
