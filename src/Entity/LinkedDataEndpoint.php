@@ -34,6 +34,16 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     "label_key" = "label_key",
  *     "url_key" = "url_key"
  *   },
+ *   config_export = {
+ *     "id",
+ *     "label",
+ *     "uuid",
+ *     "type",
+ *     "base_url",
+ *     "result_json_path",
+ *     "label_key",
+ *     "url_key"
+ *   },
  *   links = {
  *     "canonical" = "/admin/structure/linked_data_endpoint/{linked_data_endpoint}",
  *     "add-form" = "/admin/structure/linked_data_endpoint/add",
