@@ -23,5 +23,10 @@ linked_data_field.linked_data_endpoint.*:
     url_key:
       type: string
       label: 'URL JSON key'
+    third_party_settings:
+      type: sequence
+      label: 'Third party settings'
+      sequence:
+        type: '[%parent.%parent.%type].third_party.[%key]'
     uuid:
       type: string

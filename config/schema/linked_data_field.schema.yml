@@ -1,16 +1,3 @@
-linked_data_field.settings:
-  type: config_object
-  label: 'Settings'
-  mapping:
-    base_url:
-      type: uri
-      label: 'Base URL'
-    grid_url:
-      type: uri
-      label: 'Wikidata URL'
-    funder_url:
-      type: uri
-      label: 'Funder URL'
 field.field_settings.linked_data_field:
   type: mapping
   label: 'Linked data field settings'
