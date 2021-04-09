@@ -64,7 +64,7 @@ class LDLinkFormatter extends FormatterBase{
       try {
         $url = Url::fromUri($item->url);
         $elements[$delta] = [
-          '#title' => $this->viewValue($item),
+          '#title' => \Drupal\Core\Render\Markup::create($this->viewValue($item)),
           '#type' => 'link',
           '#url' => $url,
         ];
