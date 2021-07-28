@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  linked_data_field:
+    sparql_query-sparql_query: "select ?Subject ?Term ?Label{\r\n?Subject a skos:Concept; luc:term \"@input\"; skos:inScheme aat: ; .\r\n\r\n?Subject rdfs:label ?Label\r\n} order by asc(lcase(str(?Term)))\r\nLIMIT 20"
+id: getty_art_and_architecture_thesaurus
+label: 'Getty Art and Architecture Thesaurus'
+type: sparql_query
+base_url: 'http://vocab.getty.edu/sparql'
+result_json_path: results.bindings
+label_key: Label
+url_key: Subject
