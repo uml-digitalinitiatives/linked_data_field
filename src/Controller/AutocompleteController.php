@@ -56,7 +56,7 @@ class AutocompleteController extends ControllerBase {
    *   The page request object.
    *
    * @return string
-   *   Return Hello string.
+   *   Return Autocomplete result string.
    */
   public function handleAutocomplete(LinkedDataEndpointInterface $linked_data_endpoint = NULL, Request $request = NULL) {
     $results = [];
@@ -64,14 +64,25 @@ class AutocompleteController extends ControllerBase {
     $endpoint = $this->entityTypeManager()->getStorage('linked_data_endpoint')->load($endpoint_id);
     $plugin = $this->ldEntityTypePluginManager->createInstance($endpoint->get('type'), ['endpoint' => $endpoint]);
 
+    $debug = $request->query->get('_ldquery_debug');
+
     if ($input = $request->query->get('q')) {
       $typed_string = Tags::explode($input);
       $typed_string = mb_strtolower(array_pop($typed_string));
-      $service_results = $plugin->getSuggestions($typed_string);
-      foreach ($service_results as $label => $url) {
-        $results[] = ['value' => $url, 'label' => $label];
+      $service_results = $plugin->getSuggestions($typed_string, $debug);
+
+      // We changed the format of the results from [value => label] to ['value' => $value, 'label' => $label].
+      // In case a plugin has not been updatd, we put the results into that format here.
+      if (count($service_results) && !isset($service_results[0]['value'])) {
+        foreach ($service_results as $label => $url) {
+          $results[] = ['value' => $url, 'label' => $label];
+        }
       }
+      else {
+          $results = $service_results;
+        }
     }
+
     return new JsonResponse($results);
   }
 

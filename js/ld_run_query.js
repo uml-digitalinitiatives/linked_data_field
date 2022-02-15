@@ -8,7 +8,7 @@ Drupal.behaviors.ld_run_query = {
       // Do something!
       console.log('Run query button clicked!');
       console.log(drupalSettings.linkedDataField);
-      jQuery('#edit-results').load('/linked-data-lookup/' + drupalSettings.linkedDataField.runQuery.endPointName + '?q='
+      jQuery('#edit-results').load('/linked-data-lookup/' + drupalSettings.linkedDataField.runQuery.endPointName + '?_ldquery_debug=true&q='
       + jQuery('#edit-candidate').val());
     }, false);
 

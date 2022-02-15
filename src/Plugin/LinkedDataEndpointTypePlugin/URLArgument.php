@@ -2,8 +2,8 @@
 
 namespace Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePlugin;
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginBase;
+use GuzzleHttp\Exception\GuzzleException;
 use JmesPath\Env as JM;
 /**
  * Class URLArgument
@@ -34,9 +34,13 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
     if ((string) $base_url == 'http://test.test/') {
       return $this->getTestData($candidate);
     }
-    $request = $this->httpClient->get($endpoint->get('base_url') .
-      urlencode($candidate));
-    $response = json_decode($request->getBody());
+    try {
+      $request = $this->httpClient->get($endpoint->get('base_url') .
+        urlencode($candidate));
+      $response = json_decode($request->getBody());
+    } catch (GuzzleException $error) {
+      return $this->handleHttpException($error);
+    }
 
     return $this->parseResponse($response, $endpoint);
   }
@@ -56,8 +60,9 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
     $url_key = $endpoint->get('url_key');
 
     foreach ($data as $i => $result) {
-      $output[$result->{$label_key}] = $result->{$url_key};
+      $output[] = ['label' => $result->{$label_key}, 'value' => $result->{$url_key}];
     }
     return $output;
   }
+
 }

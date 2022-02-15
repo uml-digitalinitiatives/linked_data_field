@@ -113,8 +113,9 @@ class LinkedDataEndpointForm extends EntityForm {
     }
 
     $form['sample-query'] = [
-      '#type' => 'fieldset',
+      '#type' => 'details',
       '#title' => $this->t('Run a sample query'),
+      '#open' => FALSE,
     ];
 
     $form['sample-query']['candidate'] = [
@@ -148,6 +149,11 @@ class LinkedDataEndpointForm extends EntityForm {
     $form['sample-query']['results'] = [
       '#type' => 'textarea',
       '#title' => $this->t("Query results"),
+    ];
+
+    $form['sample-query']['debug'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("Raw query result debug output."),
     ];
 
     return $form;

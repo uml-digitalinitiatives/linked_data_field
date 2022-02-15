@@ -1,4 +1,8 @@
 services:
+  logger.channel.linked_data_field:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: logger.factory:get
+    arguments: ['linked_data_field']
   plugin.manager.linked_data_endpoint_type_plugin:
     class: Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginManager
     parent: default_plugin_manager

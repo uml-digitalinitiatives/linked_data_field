@@ -4,6 +4,7 @@ namespace Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePlugin;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginBase;
+use GuzzleHttp\Exception\GuzzleException;
 use Rs\Json\Pointer;
 use Rs\Json\Pointer\InvalidJsonException;
 use Rs\Json\Pointer\NonexistentValueReferencedException;
@@ -38,9 +39,15 @@ class LoCAuthority extends URLArgument {
     if ((string) $base_url == 'http://test.test/') {
       return $this->getTestData($candidate);
     }
-    $request = $this->httpClient->get($endpoint->get('base_url') .
-      urlencode($candidate));
-    $response = json_decode($request->getBody());
+
+    try {
+      $request = $this->httpClient->get($endpoint->get('base_url') .
+        urlencode($candidate));
+      $response = json_decode($request->getBody());
+    } catch (GuzzleException $error) {
+      return $this->handleHttpException($error);
+    }
+
 
     return $this->parseResponse($response, $endpoint);
   }

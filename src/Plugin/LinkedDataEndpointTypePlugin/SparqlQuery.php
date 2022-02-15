@@ -5,6 +5,7 @@ namespace Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePlugin;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\linked_data_field\Plugin\LinkedDataEndpointTypePluginBase;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Class URLArgument
@@ -23,14 +24,17 @@ class SparqlQuery extends LinkedDataEndpointTypePluginBase {
     $sparql_endpoint = $endpoint->get('base_url');
     $input = strtolower($candidate);
     $query = new FormattableMarkup($endpoint->getThirdPartySetting('linked_data_field', 'sparql_query-sparql_query'), ['@input' => $input]);
-    $response = $this->httpClient->request('GET', $sparql_endpoint,
-      [
-        'headers' => [
-          'Accept' => 'application/sparql-results+json, application/json',
-        ],
-        'query' => ['query' => (string) $query],
-      ]);
+    try {
+      $response = $this->httpClient->request('GET', $sparql_endpoint,
+        [
+          'headers' => [
+            'Accept' => 'application/sparql-results+json, application/json',
+          ],
+          'query' => ['query' => (string) $query],
+        ]);
+    } catch (GuzzleException $error) {
 
+    }
     $json = $response->getBody()->getContents();
     $data = json_decode($json);
 
