@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  linked_data_field:
+    sparql_query-sparql_query: ''
+id: research_organization_registry_institution
+label: 'Research Organization Registry - Institution'
+type: url_argument
+base_url: 'http://api.ror.org/organizations?query='
+result_json_path: items
+label_key: name
+url_key: id
+
