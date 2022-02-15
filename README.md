@@ -4,8 +4,9 @@ Provides an autocomplete field widget that
 pulls suggested matches and URLs from various authoritative
 sources.
 
-As examples, the module provies [Library of Congress Subject Headings][1],
-[Global Research Identifier Database (GRID)][2] entries, and [CrossRef Funder identifiers][3]
+As examples, the module provides [Library of Congress Subject Headings][1],
+[Research Organization Registry](2)
+ entries, and [CrossRef Funder identifiers][3]
 and [Australian and New Zealand Standard Research Classifications][4] out of the box. More
 endpoints can be added by following the plugin pattern.
 
@@ -14,7 +15,7 @@ item.
 
 [1]: http://id.loc.gov/authorities/subjects.html
 
-[2]: https://www.grid.ac
+[2]:https://ror.org/
 
 [3]: https://www.crossref.org/services/funder-registry/
 
@@ -105,7 +106,7 @@ The important parts are:
  - Add "@input" where the string to be quaried should go, and
  - Label JSON key and URL JSON Key contain the variables you are asking for in the query.
 
-You can inspect the supplied examples, GRID ID and
+You can inspect the supplied examples,
 [Australian and New Zealand Standard Research Classification](https://en.wikipedia.org/wiki/Australian_and_New_Zealand_Standard_Research_Classification)
 in this module's src/Plugin/LinkedDataEndpointType directory.
 
