@@ -3,6 +3,7 @@
 
 namespace Drupal\linked_data_field\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Render\Markup;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
@@ -64,7 +65,7 @@ class LDLinkFormatter extends FormatterBase{
       try {
         $url = Url::fromUri($item->url);
         $elements[$delta] = [
-          '#title' => \Drupal\Core\Render\Markup::create($this->viewValue($item)),
+          '#title' => Markup::create($this->viewValue($item)),
           '#type' => 'link',
           '#url' => $url,
         ];

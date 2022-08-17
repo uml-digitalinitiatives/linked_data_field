@@ -100,7 +100,7 @@ class LDAutocompleteWidgetTest extends WebDriverTestBase {
     $form_display_manager = \Drupal::entityTypeManager()
       ->getStorage('entity_form_display');
 
-    $ids = \Drupal::entityQuery('entity_form_display')->execute();
+    $ids = \Drupal::entityQuery('entity_form_display')->accessCheck(FALSE)->execute();
 
     $form_display_id = $form_display_manager
       ->create([
