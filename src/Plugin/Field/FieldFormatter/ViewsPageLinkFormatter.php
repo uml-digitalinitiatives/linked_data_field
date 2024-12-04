@@ -2,6 +2,7 @@
 
 namespace Drupal\linked_data_field\Plugin\Field\FieldFormatter;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -63,7 +64,11 @@ class ViewsPageLinkFormatter extends FormatterBase
       '#description' => $this->t('The view display to use for the field.')
     ];
 
-    $value = $this->getSetting('view_to_use');
+    $field_name = $this->fieldDefinition->getName();
+    $value = NestedArray::getValue($form_state->getUserInput(), ['fields', $field_name, 'settings_edit_form', 'settings', 'view_to_use']);
+    if (is_null($value)) {
+      $value = $this->getSetting('view_to_use');
+    }
     if ($value) {
       $view = Views::getView($value);
       if ($view) {
@@ -98,7 +103,7 @@ class ViewsPageLinkFormatter extends FormatterBase
    */
   public function getViewsParts(array $form, FormStateInterface $form_state) {
     $field_name = $this->fieldDefinition->getItemDefinition()->getFieldDefinition()->getName();
-    return $form['fields'][$field_name]['plugin']['settings_edit_form']['settings']['view_display_to_use'];
+    return NestedArray::getValue($form, ['fields', $field_name, 'plugin', 'settings_edit_form', 'settings', 'view_display_to_use']);
   }
 
   /**
@@ -126,8 +131,8 @@ class ViewsPageLinkFormatter extends FormatterBase
     $user = User::load(\Drupal::currentUser()->id());
     $view = Views::getView($this->getSetting('view_to_use'));
     $elements = [];
-    if ($view && $view->access($this->getSetting('view_display_to_use'), $user)) {
-      $display_id = $this->getSetting('view_display_to_use');
+    $display_id = $this->getSetting('view_display_to_use');
+    if ($view && $view->access($display_id, $user)) {
       $view->setDisplay($display_id);
       foreach ($items as $item) {
         $elements[] = [
