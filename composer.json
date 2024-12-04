@@ -24,6 +24,7 @@
     "source": "http://cgit.drupalcode.org/linked_data_field"
   },
   "require": {
+    "php": ">=8.0",
     "mtdowling/jmespath.php": "^2.5"
   }
 }

@@ -67,8 +67,22 @@ class AutocompleteController extends ControllerBase {
     $debug = $request->query->get('_ldquery_debug');
 
     if ($input = $request->query->get('q')) {
+      // Remove quotes from the input string. These are necessary if you want a comma in the string.
+      if (str_starts_with($input, '"')) {
+        $input = substr($input, 1);
+      }
+      if (str_ends_with($input, '"')) {
+        $input = substr($input, 0, -1);
+      }
       $typed_string = Tags::explode($input);
-      $typed_string = mb_strtolower(array_pop($typed_string));
+      if (count($typed_string) > 1) {
+        // Tags separates on commas, but we want to treat the entire string as a single search term.
+        $typed_string = implode(', ', $typed_string);
+      }
+      else {
+        $typed_string = array_pop($typed_string);
+      }
+      $typed_string = mb_strtolower($typed_string);
       $service_results = $plugin->getSuggestions($typed_string, $debug);
 
       // We changed the format of the results from [value => label] to ['value' => $value, 'label' => $label].
