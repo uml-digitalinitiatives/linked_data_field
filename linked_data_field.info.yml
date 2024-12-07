@@ -2,5 +2,5 @@ name: 'Linked Data Lookup Field'
 type: module
 description: 'Query SPARQL and other endpoints as autocomplete sources'
 package: 'Islandora'
-core_version_requirement: ^9.3 || ^10
+core_version_requirement: ^9.3 || ^10 || ^11
 
