@@ -41,11 +41,25 @@ class LDAutocompleteWidgetTest extends WebDriverTestBase {
   ];
 
   /**
+   * Current page.
+   *
+   * @var \Behat\Mink\Element\DocumentElement
+   */
+  protected $page;
+
+  /**
    * A user with permission to administer site configuration.
    *
    * @var \Drupal\user\UserInterface
    */
   protected $user;
+
+  /**
+   * Web assert driver.
+   *
+   * @var \Drupal\FunctionalJavascriptTests\WebDriverWebAssert
+   */
+  protected $webAssert;
 
   /**
    * {@inheritdoc}
