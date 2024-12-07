@@ -18,7 +18,7 @@ class LDAutocompleteWidgetTest extends WebDriverTestBase {
    *
    * @var string
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * Don't error out due to third-party settings.
@@ -144,9 +144,9 @@ class LDAutocompleteWidgetTest extends WebDriverTestBase {
 
     $field_display_item = $assert_session->waitForElement('css', '[name="fields[test_subject_field][region]"]');
     $field_display_item->setValue('content');
-    $assert_session->assertWaitOnAjaxRequest(2000);
+    $assert_session->waitOnAutocomplete(2000);
     $this->click('#edit-submit');
-    $assert_session->assertWaitOnAjaxRequest(2000);
+    $assert_session->statusMessageExistsAfterWait('status');
 
     $this->drupalLogout();
 
