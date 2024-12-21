@@ -14,7 +14,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 class LDAutocompleteWidgetTest extends WebDriverTestBase {
 
   /**
-   * Default theme to use now taht 'classy' isn't assumed.
+   * Default theme to use now that 'classy' isn't assumed.
    *
    * @var string
    */

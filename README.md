@@ -29,6 +29,48 @@ composer:
     composer require drupal/linked_data_field
 
 
+## Taxonomy Term Autocomplete
+
+The module lets you use the linked data endpoint data source
+as the source for entities in a taxonomy term autocomplete field.
+
+If the user chooses an item that does not yet exist as a
+taxonomy term, it will be created automatically.
+
+Subsequent lookups of the same term will return the
+existing term entity.
+
+### Configuring Taxonomy Term Autocomplete
+
+First, add a linked data lookup field to a taxonomy vocabulary:
+
+1. Go to Admin >> Structure >> Taxonomy and choose an existing taxonomy vocabulary or create a new one.
+2. Go to Manage Fields and click '+ Create a New Field.'.
+3. Create a new Linked Data Lookup field.
+  - Choose Limited cardinality with a maximum of 1 item.
+  - Select the data source for the field.
+  - Do not set a default value.
+
+Next, add the term reference to a content entity type.
+
+1. Go to Admin >> Structure >> Content Types  and click 'Manage Fields' next to the type you want to add a term reference to.
+2. Click '+ Create a new field' and choose 'Reference' and click Continue.
+3. Select 'Taxonomy Term' as the entity type to reference and click Continue.
+4. On the next page::
+  - Choose 'Linked Data Lookup' for the Refference Method,
+  - Check the 'Create referenced entities if they don't already exist' checkbox.
+  - Choose the vocabulary you added a field to in the previous section from the Vocabulary checkboxes and click Save Settings.
+5. When the field has been created, go to the Manage Form display tab. In the widget plugin select list choose 'Autocomplete from linked data source' and click Save.
+
+To test the autocomplete taxonomy term field, create a new entity of the type you just added a Reference field to.
+
+Start typing the name of an item from the data source.. An autocomplete drop-down will
+appear with suggestions as you type.
+
+Select an item and when the entity you are editing is saved, a new term will be created.
+
+Subsequently, if the same term is chosen, then the existing entity is used.
+
 ## Linked Data Lookup Endpoint Configuration Entities
 
 Custom endpoints are stored as configuration entities.
