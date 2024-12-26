@@ -36,7 +36,9 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
     }
     try {
       $request = $this->httpClient->get($endpoint->get('base_url') .
-        urlencode($candidate));
+        urlencode($candidate), ['headers' => [
+
+        'Accept'     => 'application/json',]]);
       $response = json_decode($request->getBody());
     } catch (GuzzleException $error) {
       return $this->handleHttpException($error);
@@ -53,15 +55,22 @@ class URLArgument extends LinkedDataEndpointTypePluginBase {
    */
   protected function parseResponse($response, $endpoint) {
     $root = $endpoint->get('result_json_path');
-    $data = JM::search($root, $response);
+
+    if ($root == '') {
+      $data = $response;
+    }
+    else {
+      $data = JM::search($root, $response);
+    }
 
     $output = [];
     $label_key = $endpoint->get('label_key');
     $url_key = $endpoint->get('url_key');
 
     foreach ($data as $i => $result) {
-      $output[] = ['label' => $result->{$label_key}, 'value' => $result->{$url_key}];
-    }
+      $label = JM::search($label_key, $result);
+      $url = JM::search($url_key, $result);
+      $output[] = ['label' => $label, 'value' => $url];    }
     return $output;
   }
 

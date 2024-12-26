@@ -72,18 +72,18 @@ class LinkedDataEndpointForm extends EntityForm {
 
     $form['label_key'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Label JSON key'),
-      '#maxlength' => '50',
-      '#description' => $this->t('The JSON key that holds the human-readable label of the returned value. Can be a string or a numeric index.'),
+      '#title' => $this->t('Label JSON path'),
+      '#maxlength' => '250',
+      '#description' => $this->t('The JSON path that holds the human-readable label of the returned value, relative to the result record node. Can be a string or a numeric index. Can also be a <a href="https://jmespath.org/specification.html#grammar">JMESPath expression</a>'),
       '#default_value' => $linked_data_endpoint->get('label_key'),
       '#required' => TRUE,
     ];
 
     $form['url_key'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('URL JSON key'),
-      '#maxlength' => '50',
-      '#description' => $this->t('The JSON key that holds the canonical item URL.  Can be a string or a numeric index. Can also be a <a href="https://jmespath.org/specification.html#grammar">JMESPath expression</a>.'),
+      '#title' => $this->t('URL JSON path'),
+      '#maxlength' => '250',
+      '#description' => $this->t('The JSON path that holds the canonical item URL, relative to the result record node. Can be a string or a numeric index. Can also be a <a href="https://jmespath.org/specification.html#grammar">JMESPath expression</a>.'),
       '#default_value' => $linked_data_endpoint->get('url_key'),
 
     ];
