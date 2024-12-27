@@ -6,8 +6,7 @@ sources.
 
 As examples, the module provides [Library of Congress Subject Headings][1],
 [Research Organization Registry](2)
- entries, and [CrossRef Funder identifiers][3]
-and [Australian and New Zealand Standard Research Classifications][4] out of the box. More
+ entries, [CrossRef Funder identifiers][3], [Australian and New Zealand Standard Research Classifications][4] and [Nomenclature for Museum Cataloging][8] out of the box. More
 endpoints can be added by following the plugin pattern.
 
 The authority link is then stored along with the chosen
@@ -20,6 +19,8 @@ item.
 [3]: https://www.crossref.org/services/funder-registry/
 
 [4]: https://www.abs.gov.au/ausstats/abs@.nsf/0/6BB427AB9696C225CA2574180004463E
+
+[8]: https://page.nomenclature.info/apropos-about.app?lang=en
 
 ## Installation
 
