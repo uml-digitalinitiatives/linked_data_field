@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  linked_data_field:
+    sparql_query-sparql_query: ''
+id: nomenclature
+label: Nomenclature for Museum Cataloging
+type: url_argument
+base_url: 'https://nomenclature.info/api/v1/search?termSearch='
+result_json_path: ''
+label_key: "prefLabel[?literalForm.language=='en'].literalForm.value | [0]"
+url_key: uri
