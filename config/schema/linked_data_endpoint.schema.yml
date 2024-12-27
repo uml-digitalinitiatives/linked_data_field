@@ -24,9 +24,15 @@ linked_data_field.linked_data_endpoint.*:
       type: string
       label: 'URL JSON key'
     third_party_settings:
-      type: sequence
+      type: mapping
       label: 'Third party settings'
-      sequence:
-        type: '[%parent.%parent.%type].third_party.[%key]'
+      mapping:
+        linked_data_field:
+          type: mapping
+          label: 'Linked Data Field'
+          mapping:
+            sparql_query-sparql_query:
+              type: string
+              label: 'SPARQL Query'
     uuid:
       type: string

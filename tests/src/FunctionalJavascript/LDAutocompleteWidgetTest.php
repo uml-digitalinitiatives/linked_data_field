@@ -25,7 +25,7 @@ class LDAutocompleteWidgetTest extends WebDriverTestBase {
    *
    * @var bool
    */
-  protected $strictConfigSchema = FALSE;
+  //protected $strictConfigSchema = FALSE;
 
   /**
    * Modules to enable.
